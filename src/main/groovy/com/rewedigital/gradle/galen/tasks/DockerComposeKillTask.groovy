@@ -9,6 +9,7 @@ class DockerComposeKillTask extends DefaultTask {
 
     static final EXECUTABLE = "docker-compose"
 
+
     @InputFile
     def getComposeFile() {
         Util.composeFile(project)

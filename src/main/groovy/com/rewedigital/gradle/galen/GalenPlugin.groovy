@@ -16,6 +16,7 @@ class GalenPlugin implements Plugin<Project> {
 
     private static final String GROUP = 'Galen'
 
+    
     void apply(Project project) {
         project.extensions.create(EXTENSION_NAME, GalenPluginExtension)
 
