@@ -3,26 +3,17 @@ package com.rewedigital.gradle.galen
 import org.gradle.testkit.runner.GradleRunner
 import org.junit.Rule
 import org.junit.rules.TemporaryFolder
-import spock.lang.Ignore
 import spock.lang.Specification
 
-@Ignore
 class GalenPluginSpec extends Specification {
 
     @Rule
     final TemporaryFolder testProjectDir = new TemporaryFolder()
 
-    File buildFile
 
-
-    def setup() {
-        buildFile = testProjectDir.newFile('build.gradle')
-    }
-
-
-    def "Apply the plugin"() {
+    def "Applying the plugin works"() {
         given:
-        buildFile << """
+        testProjectDir.newFile('my-build.gradle') << """
             plugins {
                 id 'com.rewedigital.galen'
             }
@@ -31,6 +22,7 @@ class GalenPluginSpec extends Specification {
         when:
         GradleRunner.create()
                 .withProjectDir(testProjectDir.root)
+                .withArguments(["-b", "my-build.gradle"])
                 .withPluginClasspath()
                 .build()
 
