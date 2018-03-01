@@ -32,5 +32,4 @@ class GalenExtractTask extends DefaultTask {
             }
         }
     }
-
 }

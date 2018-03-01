@@ -4,13 +4,18 @@ import com.rewedigital.gradle.galen.browsers.Browser
 import com.rewedigital.gradle.galen.util.Util
 import org.gradle.api.DefaultTask
 import org.gradle.api.GradleException
+import org.gradle.api.logging.Logger
+import org.gradle.api.logging.Logging
 import org.gradle.api.tasks.TaskAction
 import org.yaml.snakeyaml.Yaml
 
 import static com.rewedigital.gradle.galen.GalenPluginExtension.EXTENSION_NAME
-import static java.util.concurrent.TimeUnit.*
+import static java.util.concurrent.TimeUnit.HOURS
+import static java.util.concurrent.TimeUnit.MINUTES
 
 class GalenRunTask extends DefaultTask {
+
+    private static final Logger LOG = Logging.getLogger(GalenRunTask.class)
 
     private static final int TESTSUITE_TIMEOUT_MILLIS = HOURS.toMillis(1)
 
@@ -19,10 +24,12 @@ class GalenRunTask extends DefaultTask {
     def action() {
         def workingDirectory = new File(project.getRootDir(), project.extensions[EXTENSION_NAME].galenWorkingDirectory)
         if (!workingDirectory.exists() && !workingDirectory.mkdirs()) {
+            def errorMessage = "Error creating galen working directory ${project.extensions[EXTENSION_NAME].galenWorkingDirectory}."
             if (project.extensions[EXTENSION_NAME].failBuildOnErrors) {
-                throw new GradleException("Error creating galen working directory ${project.extensions[EXTENSION_NAME].galenWorkingDirectory}")
+                LOG.error(errorMessage)
+                throw new GradleException(errorMessage)
             } else {
-                println "Error creating galen working directory ${project.extensions[EXTENSION_NAME].galenWorkingDirectory}"
+                LOG.warn(errorMessage)
             }
         }
 
@@ -44,7 +51,7 @@ class GalenRunTask extends DefaultTask {
         def testsuitesDirectory = project.extensions[EXTENSION_NAME].testsuitesDirectory
 
         def testsDescription = testGroups ? "test groups: '${testGroups}'" : 'ALL tests'
-        println "Executing Test Suites (${testsDescription}) ..."
+        LOG.info("Executing Test Suites ({}) ...", testsDescription)
         def testPath = new File(testsuitesDirectory).absolutePath
         Exception lastException = null
 
@@ -57,7 +64,7 @@ class GalenRunTask extends DefaultTask {
                     def reportDirectory = "build/reports/tests/uiTest/${browser.browserId}/${new File(testPath).name}"
                     executeTestSuitesOnSpecificBrowser(testPath, reportDirectory, seleniumDriverUrl, browser.browserId, testGroups)
                 } catch (Exception e) {
-                    println("\nTest suite execution failed: ${e.message}")
+                    LOG.warn("Test suite execution failed: {}", e.getMessage())
                     lastException = e
                 }
             })
@@ -103,20 +110,16 @@ class GalenRunTask extends DefaultTask {
         def url = new URL("http://localhost:${port}/${healthCheckPathWithoutLeadingSlash}")
         def endTimeMillis = System.currentTimeMillis() + MINUTES.toMillis(project.extensions[EXTENSION_NAME].sutReadinessTimeoutInMinutes)
 
-        print("Healthcheck on URL '${url}' ")
-        System.out.flush()
+        LOG.quiet("Healthcheck on URL '{}' ...", url)
         while (System.currentTimeMillis() < endTimeMillis) {
             try {
-                print('.')
-                System.out.flush()
-
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection()
                 connection.setRequestMethod('GET')
                 connection.connect()
 
                 int code = connection.responseCode
                 if (code == 200) {
-                    println(' SUCCESSFUL')
+                    LOG.quiet('SUCCESSFUL.')
                     return
                 }
             } catch (IOException e) {
@@ -124,7 +127,7 @@ class GalenRunTask extends DefaultTask {
             }
             sleep(1000)
         }
-        println(' FAILED')
+        LOG.warn('FAILED.')
         throw new GradleException('Service was not healthy')
     }
 

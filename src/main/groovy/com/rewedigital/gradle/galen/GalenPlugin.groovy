@@ -14,7 +14,7 @@ import static com.rewedigital.gradle.galen.GalenPluginExtension.EXTENSION_NAME
 
 class GalenPlugin implements Plugin<Project> {
 
-    final static String GROUP = 'Galen'
+    private static final String GROUP = 'Galen'
 
     void apply(Project project) {
         project.extensions.create(EXTENSION_NAME, GalenPluginExtension)

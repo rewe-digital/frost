@@ -2,7 +2,7 @@ package com.rewedigital.gradle.galen
 
 class GalenPluginExtension {
 
-    final static String EXTENSION_NAME = 'galen'
+    static final String EXTENSION_NAME = 'galen'
 
 
     String galenWorkingDirectory = 'galen'

@@ -2,6 +2,8 @@ package com.rewedigital.gradle.galen.util
 
 import com.rewedigital.gradle.galen.browsers.Browser
 import org.gradle.api.GradleException
+import org.gradle.api.logging.Logger
+import org.gradle.api.logging.Logging
 
 import static com.rewedigital.gradle.galen.GalenPluginExtension.EXTENSION_NAME
 import static java.util.concurrent.TimeUnit.MINUTES
@@ -9,7 +11,10 @@ import static java.util.concurrent.TimeUnit.SECONDS
 
 class Util {
 
-    final static long SYNCHRONOUS_PROCESS_TERMINATION_TIMEOUT_MINUTES = 15
+    private static final Logger LOG = Logging.getLogger(Util.class)
+
+    private static final long SYNCHRONOUS_PROCESS_TERMINATION_TIMEOUT_MINUTES = 15
+
 
     static def composeOverrideFile(project) {
         new File("${project.buildDir}", 'tmp/' + "${project.extensions[EXTENSION_NAME].composeOverrideFile}")
@@ -47,7 +52,7 @@ class Util {
     }
 
     private static int executeInternal(cmd, executeSynchronously, processIdentifier, failFast = true) {
-        println("Executing '${cmd.join(" ")}'")
+        LOG.info("Executing '{}'", cmd.join(" "))
         def logDirectory = new File('build/reports/galen-logs')
         def logFile = new File(logDirectory, "${processIdentifier}.log")
         def processBuilder = new ProcessBuilder(cmd as String[])
