@@ -114,14 +114,15 @@ apply plugin: "com.rewedigital.galen"
 ```
 
 ## Release
-Currently the release process is an upload to Artifactory. This can be done by executing the gradle task _uploadArchives_
+Currently the release process is an upload to a Maven repository. This can be done by executing the gradle task _uploadArchives_
 ```
 ./gradlew uploadArchives
 ```
-This will upload the jar from your build directory to our [Artifactory](https://artifactory.rewe-digital.com) Server. You can put your Artifactory credentials
- in the gradle.properties 
-file in your home directory ~/.gradle/gradle.properties
+This will upload the built jar to the configured Maven repository. Authentication via username and password can be provided. See the configuration options in
+ `build.gradle`:
 ```
+mavenDeploymentRepositoryUrl=mvn.mycompany.com
 mavenDeploymentRepositoryUsername=me
-mavenDeploymentRepositoryPassword=secret
+mavenDeploymentRepositoryPassword=s3cr3t
 ```
+These are normal Gradle properties. So you can also place them in your home directory into `~/.gradle/gradle.properties` or just pass them via command line.
