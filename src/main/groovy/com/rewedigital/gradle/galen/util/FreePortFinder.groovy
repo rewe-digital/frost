@@ -6,7 +6,7 @@ class FreePortFinder {
     private static final int DYNAMIC_PORT_RANGE_UB = 65535
 
     /**
-     * Not 100% bullet-proof, as two callers may get the same port number. But should be sufficient for us.
+     * Not 100% bullet-proof, as two callers could potentially get the same port number. But should be good enough.
      */
     static int getFreePort() throws BindException {
         while (true) {

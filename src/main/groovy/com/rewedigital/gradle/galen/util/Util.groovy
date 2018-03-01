@@ -74,7 +74,7 @@ class Util {
             }
             return exitCode
         } else {
-            // we wait at least for a little while, in order to verify the the process did not crash
+            // we wait at least for a little while, in order to verify that the process did not crash
             if (failFast && process.waitFor(1, SECONDS)) {
                 def exitCode = process.exitValue()
                 if (exitCode != 0) {

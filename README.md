@@ -107,7 +107,7 @@ buildscript {
         mavenLocal()
     }
     dependencies {
-        classpath('com.rewedigital:gradle-galen-plugin:0.1')
+        classpath('com.rewedigital:gradle-galen-plugin:2.4')
     }
 }
 apply plugin: "com.rewedigital.galen"
@@ -118,7 +118,7 @@ Currently the release process is an upload to Artifactory. This can be done by e
 ```
 ./gradlew uploadArchives
 ```
-This will upload the jar from your build direcotry to our [Artifactory](https://artifactory.rewe-digital.com) Server. You can put your Artifactory credentials
+This will upload the jar from your build directory to our [Artifactory](https://artifactory.rewe-digital.com) Server. You can put your Artifactory credentials
  in the gradle.properties 
 file in your home directory ~/.gradle/gradle.properties
 ```
