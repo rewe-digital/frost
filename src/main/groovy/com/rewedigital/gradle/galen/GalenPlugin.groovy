@@ -1,6 +1,7 @@
 package com.rewedigital.gradle.galen
 
 import com.rewedigital.gradle.galen.tasks.DockerComposeKillTask
+import com.rewedigital.gradle.galen.tasks.DockerComposePullTask
 import com.rewedigital.gradle.galen.tasks.DockerComposeSetupTask
 import com.rewedigital.gradle.galen.tasks.DockerComposeUpTask
 import com.rewedigital.gradle.galen.tasks.GalenDownloadTask
@@ -24,12 +25,14 @@ class GalenPlugin implements Plugin<Project> {
         def extractTask = createTask('galenExtract', GalenExtractTask, 'Extracts the Galen framework', project)
         def runTask = createTask('galenRun', GalenRunTask, 'Executes Galen UI tests', project)
         def dockerComposeSetupTask = createTask('galenComposeSetup', DockerComposeSetupTask, "Writes the compose override file", project)
+        def dockerComposePullTask = createTask('galenComposePull', DockerComposePullTask, 'Pulls for latest feasible versions of the SUT, dependent systems, and the browsers', project)
         def dockerComposeUpTask = createTask('galenComposeUp', DockerComposeUpTask, 'Creates and starts the SUT, dependent systems, and the browsers', project)
         def dockerComposeKillTask = createTask('galenComposeKill', DockerComposeKillTask, 'Kills and removes containers of the SUT, dependent systems, and the browsers', project)
 
         downloadTask.finalizedBy(extractTask)
-        dockerComposeUpTask.dependsOn(dockerComposeSetupTask)
+        dockerComposePullTask.dependsOn(dockerComposeSetupTask)
         dockerComposeKillTask.dependsOn(dockerComposeSetupTask)
+        dockerComposeUpTask.dependsOn(dockerComposeSetupTask, dockerComposePullTask)
         runTask.dependsOn(downloadTask, dockerComposeUpTask)
         runTask.finalizedBy(dockerComposeKillTask)
     }
