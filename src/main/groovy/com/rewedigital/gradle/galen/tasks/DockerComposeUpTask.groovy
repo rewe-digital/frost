@@ -1,28 +1,14 @@
 package com.rewedigital.gradle.galen.tasks
 
 import com.rewedigital.gradle.galen.util.Util
-import org.gradle.api.DefaultTask
-import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.TaskAction
 
 import static com.rewedigital.gradle.galen.GalenPluginExtension.EXTENSION_NAME
 
-class DockerComposeUpTask extends DefaultTask {
-
-    static final EXECUTABLE = "docker-compose"
-
-
-    @InputFile
-    def getComposeFile() {
-        Util.composeFile(project)
-    }
-
-    @InputFile
-    def getComposeOverrideFile() {
-        Util.composeOverrideFile(project)
-    }
+class DockerComposeUpTask extends DockerComposeTask {
 
     @TaskAction
+    @Override
     def action() {
         def cmd = ["/bin/sh"]
         cmd << "-c"
