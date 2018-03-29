@@ -10,7 +10,7 @@ import org.gradle.api.tasks.TaskAction
 
 import static com.rewedigital.gradle.galen.GalenPluginExtension.EXTENSION_NAME
 
-class DockerComposeSetupTask extends DefaultTask {
+class SetupTask extends DefaultTask {
 
     @OutputFile
     def getComposeOverrideFile() {
