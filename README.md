@@ -30,7 +30,7 @@ galen {
     // Directory containing the Galen test suites, default is 'src/uiTest/galen/tests'
     testsuitesDirectory = "src/uiTest/galen/tests"
     
-    // Comma seperated list of test groups to be executed, default is all test groups. If left empty all test groups are executed.
+    // Comma separated list of test groups to be executed, default is all test groups. If left empty all test groups are executed.
     testGroups = "ci"
    
     // Amount of threads per browser for running tests in parallel, default is 1
