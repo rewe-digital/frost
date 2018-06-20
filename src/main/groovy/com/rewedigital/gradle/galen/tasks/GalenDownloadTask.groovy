@@ -14,7 +14,7 @@ class GalenDownloadTask extends DefaultTask {
 
     private static final Logger LOG = Logging.getLogger(GalenDownloadTask.class)
 
-    static final String GALEN_RELEASE = '2.3.6'
+    static final String GALEN_RELEASE = '2.3.7'
 
 
     @Input
