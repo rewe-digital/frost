@@ -15,7 +15,7 @@ import static java.util.concurrent.TimeUnit.MINUTES
 
 class GalenRunTask extends DefaultTask {
 
-    private static final Logger LOG = Logging.getLogger(GalenRunTask.class)
+    static final Logger LOG = Logging.getLogger(GalenRunTask.class)
 
     private static final int TESTSUITE_TIMEOUT_MILLIS = HOURS.toMillis(1)
 
@@ -26,7 +26,7 @@ class GalenRunTask extends DefaultTask {
         if (!workingDirectory.exists() && !workingDirectory.mkdirs()) {
             def errorMessage = "Error creating galen working directory ${project.extensions[EXTENSION_NAME].galenWorkingDirectory}."
             if (project.extensions[EXTENSION_NAME].failBuildOnErrors) {
-                LOG.error(errorMessage)
+                LOG.quiet(errorMessage)
                 throw new GradleException(errorMessage)
             } else {
                 LOG.warn(errorMessage)
@@ -38,7 +38,12 @@ class GalenRunTask extends DefaultTask {
 
         waitUntilServiceIsReady(ports[targetHost()])
 
-        executeTestSuites(ports)
+        try {
+            executeTestSuites(ports)
+        } catch (Exception e) {
+            LOG.quiet("Test execution failed.", e)
+            throw e
+        }
     }
 
 
@@ -64,8 +69,8 @@ class GalenRunTask extends DefaultTask {
                     def reportDirectory = "build/reports/tests/uiTest/${browser.browserId}/${new File(testPath).name}"
                     executeTestSuitesOnSpecificBrowser(testPath, reportDirectory, seleniumDriverUrl, browser.browserId, testGroups)
                 } catch (Exception e) {
-                    LOG.warn("Test suite execution failed: {}", e.getMessage())
                     lastException = e
+                    LOG.warn("Test suite execution failed: {}", e.getMessage())
                 }
             })
             testSuiteStarters << thread
