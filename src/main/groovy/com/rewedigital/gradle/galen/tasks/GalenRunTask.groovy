@@ -41,8 +41,13 @@ class GalenRunTask extends DefaultTask {
         try {
             executeTestSuites(ports)
         } catch (Exception e) {
-            LOG.quiet("Test execution failed.", e)
-            throw e
+            def errorMessage = "Test execution failed."
+            if (project.extensions[EXTENSION_NAME].failBuildOnErrors) {
+                LOG.quiet(errorMessage, e)
+                throw new GradleException(errorMessage, e)
+            } else {
+                LOG.warn(errorMessage, e)
+            }
         }
     }
 
