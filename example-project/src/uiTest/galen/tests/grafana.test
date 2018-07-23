@@ -15,4 +15,4 @@
 ${test_name} on ${device_name} device
     ${page} ${size}
         wait 5s until visible "id: login-view"
-        check login.gspec
+        check ${spec_file} --include "${tags}"

@@ -1,7 +1,7 @@
 @objects
-    button    css    .btn
+    button    xpath   //div[@class='login-button-group']/button
 
-= Main section =
+= Button =
 
     @on mobile
         button:
