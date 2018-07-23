@@ -1,0 +1,18 @@
+@@ set
+    spec_file       src/uiTest/galen/specs/login.gspec
+    test_name       Example Layout Test
+    page            ${galen.settings.website}
+
+@@ table viewports
+    | device_name | tags         | size      |
+    | Mobile      | mobile       | 320x600   |
+    | Tablet      | tablet       | 640x480   |
+    | Desktop     | desktop      | 1024x800  |
+    | Large       | xl-desktop   | 1920x1080 |
+
+@@ parameterized using viewports
+
+${test_name} on ${device_name} device
+    ${page} ${size}
+        wait 5s until visible "id: login-view"
+        check login.gspec

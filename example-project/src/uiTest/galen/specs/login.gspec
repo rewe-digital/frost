@@ -1,0 +1,20 @@
+@objects
+    button    css    .btn
+
+= Main section =
+
+    @on mobile
+        button:
+            css font-size is "18px"
+
+    @on tablet
+        button:
+            css font-size is "18px"
+
+    @on desktop
+        button:
+            css font-size is "18px"
+
+    @on xl-desktop
+        button:
+            css font-size is "18px"

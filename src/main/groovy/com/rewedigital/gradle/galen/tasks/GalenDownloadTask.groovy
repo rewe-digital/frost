@@ -14,29 +14,28 @@ class GalenDownloadTask extends DefaultTask {
 
     private static final Logger LOG = Logging.getLogger(GalenDownloadTask.class)
 
-    static final String GALEN_RELEASE = '2.3.7'
-
-
     @Input
-    static final String GALEN_DOWNLOAD_URL = "https://github.com/galenframework/galen/releases/download/galen-${GALEN_RELEASE}/galen-bin-${GALEN_RELEASE}.zip"
+    def getGalenDownloadUrl() {
+        "${project.extensions[EXTENSION_NAME].galenDownloadUrl}"
+    }
 
     @OutputFile
     def getDownloadFile() {
-        new File(project.extensions[EXTENSION_NAME].galenCacheDirectory, "/${GALEN_RELEASE}/galen.zip")
+        new File("${project.extensions[EXTENSION_NAME].galenCacheDirectory}", "/${project.extensions[EXTENSION_NAME].galenVersion}/galen.zip")
     }
 
     @TaskAction
     def action() {
         try {
-            LOG.quiet("Downloading Galen Framework to '{}' ...", getDownloadFile().getAbsolutePath())
-            Util.download(GALEN_DOWNLOAD_URL, getDownloadFile())
+            LOG.quiet("Downloading Galen Framework from {} to '{}' ...", getGalenDownloadUrl(), getDownloadFile().getAbsolutePath())
+            Util.download(getGalenDownloadUrl(), getDownloadFile())
             LOG.quiet("DONE.")
         } catch (Exception e) {
             if (project.extensions[EXTENSION_NAME].failBuildOnErrors) {
-                LOG.error("Encountered error: {}", e.message)
+                LOG.error("Download failed: {}", e.message)
                 throw e
             } else {
-                LOG.warn("Encountered error, nevertheless not failing the Build: {}", e.message)
+                LOG.warn("Download failed, nevertheless not failing the Build: {}", e.message)
             }
         }
     }

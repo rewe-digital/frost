@@ -38,14 +38,14 @@ class SetupTask extends DefaultTask {
             content += "  proxy:\n" +
                     "    image: rodolpheche/wiremock\n" +
                     "    ports:\n" +
-                    "      - ${FreePortFinder.freePort}:8080\n" +
+                    "      - ${FreePortFinder.freePort}:${project.extensions[EXTENSION_NAME].sutPort}\n" +
                     "    volumes:\n" +
                     "      - ${absoluteProxyConfigurationDirectory}:/home/wiremock\n" +
                     "    command: [\"--verbose\"]\n"
         } else {
             content += "  sut:\n" +
                     "    ports:\n" +
-                    "      - ${FreePortFinder.freePort}:8080\n"
+                    "      - ${FreePortFinder.freePort}:${project.extensions[EXTENSION_NAME].sutPort}\n"
         }
 
         Util.getBrowsers(project).each() { Browser browser ->

@@ -11,12 +11,12 @@ class GalenExtractTask extends DefaultTask {
 
     @InputFile
     def getDownloadFile() {
-        new File(project.extensions[EXTENSION_NAME].galenCacheDirectory, "/${GalenDownloadTask.GALEN_RELEASE}/galen.zip")
+        new File("${project.extensions[EXTENSION_NAME].galenCacheDirectory}", "/${project.extensions[EXTENSION_NAME].galenVersion}/galen.zip")
     }
 
     @OutputDirectory
     def getExtractedFile() {
-        new File(project.extensions[EXTENSION_NAME].galenWorkingDirectory, 'galen')
+        new File("${project.extensions[EXTENSION_NAME].galenWorkingDirectory}", 'galen')
     }
 
     @TaskAction
@@ -27,7 +27,7 @@ class GalenExtractTask extends DefaultTask {
             into project.extensions[EXTENSION_NAME].galenWorkingDirectory
 
             eachFile { details ->
-                def targetPath = details.path.replace("galen-bin-${GalenDownloadTask.GALEN_RELEASE}", 'galen')
+                def targetPath = details.path.replace("galen-bin-${project.extensions[EXTENSION_NAME].galenVersion}", 'galen')
                 details.path = targetPath
             }
         }

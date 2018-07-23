@@ -7,6 +7,8 @@ class GalenPluginExtension {
 
     String galenWorkingDirectory = 'galen'
     String galenCacheDirectory = "${System.getProperty('user.home')}/.galen"
+    String galenVersion = '2.3.7'
+    String galenDownloadUrl = "https://github.com/galenframework/galen/releases/download/galen-${galenVersion}/galen-bin-${galenVersion}.zip"
 
     String[] browsers = ['chrome', 'firefox']
     String testsuitesDirectory = 'src/uiTest/galen/tests'
@@ -16,6 +18,7 @@ class GalenPluginExtension {
     String sutTag = 'latest'
     String sutHealthCheckEndpointPath = '/admin/healthcheck'
     int sutReadinessTimeoutInMinutes = 5
+    int sutPort = 8080
 
     String composeFile = 'docker-compose.yml'
     String composeOverrideFile = 'docker-compose.override.galen.yml'

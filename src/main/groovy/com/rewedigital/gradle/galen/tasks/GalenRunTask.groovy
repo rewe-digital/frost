@@ -97,7 +97,7 @@ class GalenRunTask extends DefaultTask {
                    "--htmlreport", "${reportsDirectory}",
                    "--junitreport", "build/test-results/uiTest/TEST-${browser}.xml",
                    "--parallel-tests", "${numberOfParallelTests}",
-                   "-Dgalen.settings.website=http://${targetHost()}:8080"]
+                   "-Dgalen.settings.website=http://${targetHost()}:${project.extensions[EXTENSION_NAME].sutPort}"]
 
         if (testGroups != null) {
             cmd << "--groups"

@@ -1,0 +1,15 @@
+buildscript {
+        repositories { 
+            mavenLocal()
+            mavenCentral()
+        }
+        dependencies { classpath('com.rewedigital:gradle-galen-plugin:2.12-DEV') }
+}
+apply plugin: "com.rewedigital.galen"
+
+galen {
+    sutHealthCheckEndpointPath = '/api/health'
+    sutPort = 3000
+    composeFile = 'src/uiTest/galen/docker-compose.galen.yml'
+    browsers = [ 'chrome' ]
+}
