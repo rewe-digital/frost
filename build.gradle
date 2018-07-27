@@ -11,15 +11,12 @@ repositories {
 }
 
 dependencies {
-    compile gradleApi()
-    compile localGroovy()
-    compile('org.yaml:snakeyaml:1.20')
+    compile('org.yaml:snakeyaml:1.21')
 
-    testCompile gradleTestKit()
+    testCompile('com.github.tomakehurst:wiremock:2.18.0')
     testCompile('org.spockframework:spock-core:1.1-groovy-2.4') {
         exclude module: 'groovy-all'
     }
-    testCompile('com.github.tomakehurst:wiremock:2.18.0')
 }
 
 group = 'com.rewedigital'
