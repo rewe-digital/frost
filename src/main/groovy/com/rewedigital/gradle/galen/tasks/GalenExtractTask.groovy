@@ -11,7 +11,7 @@ class GalenExtractTask extends DefaultTask {
 
     @InputFile
     def getDownloadFile() {
-        new File("${project.extensions[EXTENSION_NAME].galenCacheDirectory}", "/${project.extensions[EXTENSION_NAME].galenVersion}/galen.zip")
+        new File("${project.extensions[EXTENSION_NAME].galenCacheDirectory}", "${project.extensions[EXTENSION_NAME].galenVersion}/galen.zip")
     }
 
     @OutputDirectory

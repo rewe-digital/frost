@@ -22,6 +22,12 @@ galen {
     
     // Directory in which to store the cached Galen binary, default is '<USER_HOME>/.galen'
     galenCacheDirectory = "uiTest"
+    
+    // The Galen version to use, default is "2.3.7".
+    galenVersion = '2.3.6'
+    
+    // The URL where to download the Galen binary, default is "https://github.com/galenframework/galen/releases/download/galen-${galenVersion}/galen-bin-${galenVersion}.zip".
+    galenDownloadUrl = "https://my-company-bin-repository/galen/galen-special-version.zip"
 
     // Which browsers to use, default is ['chrome', 'firefox']. Supported browsers are 'chrome' and 'firefox'.
     browsers = ["chrome"] 
@@ -37,6 +43,9 @@ galen {
 
     // Tag of the SUT image to be tested, default is 'latest'.
     sutTag = "${applicationVersion}"
+    
+    // Port (internal) used by the SUT, default is 8080.
+    sutPort = 8081
     
     // Path of the endpoint to be queried in order to detect if the SUT is up and running, default is '/admin/healthcheck'.
     // The endpoint must respond with status code 200 if and only if the SUT is ready.

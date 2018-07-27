@@ -16,9 +16,9 @@ class GalenPluginExtension {
     int numberOfParallelTests = 1
 
     String sutTag = 'latest'
+    int sutPort = 8080
     String sutHealthCheckEndpointPath = '/admin/healthcheck'
     int sutReadinessTimeoutInMinutes = 5
-    int sutPort = 8080
 
     String composeFile = 'docker-compose.yml'
     String composeOverrideFile = 'docker-compose.override.galen.yml'

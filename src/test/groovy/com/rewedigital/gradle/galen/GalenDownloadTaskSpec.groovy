@@ -8,18 +8,21 @@ import org.junit.Rule
 import org.junit.rules.TemporaryFolder
 import spock.lang.Specification
 
-import static org.gradle.testkit.runner.TaskOutcome.*
+import static org.gradle.testkit.runner.TaskOutcome.SUCCESS
 
 class GalenDownloadTaskSpec extends Specification {
+
+    static final String TASK_NAME = ':galenDownload'
 
     @Rule
     final TemporaryFolder testProjectDir = new TemporaryFolder()
 
-    File buildFile
     static final int wireMockPort = FreePortFinder.freePort
-    static final WireMockServer wireMockServer  = new WireMockServer(wireMockPort)
+    static final WireMockServer wireMockServer = new WireMockServer(wireMockPort)
+    File buildFile
 
-    static {
+
+    def setupSpec() {
         wireMockServer.stubFor(WireMock.any(WireMock.urlPathEqualTo("/galen/galen.zip"))
                 .willReturn(WireMock.aResponse()
                 .withStatus(200)
@@ -32,7 +35,7 @@ class GalenDownloadTaskSpec extends Specification {
         buildFile = testProjectDir.newFile('build.gradle')
         buildFile << """
             plugins {
-                id 'com.rewedigital.galen'  
+                id 'com.rewedigital.galen'
             }
             galen {
                 galenVersion = "test-version"
@@ -41,9 +44,9 @@ class GalenDownloadTaskSpec extends Specification {
         """
     }
 
+
     def "Can Successfully Download Galen"() {
         given:
-        def taskName = 'galenDownload'
         buildFile << """
             galen {
                 galenDownloadUrl = "http://127.0.0.1:${wireMockPort}/galen/galen.zip"
@@ -53,27 +56,26 @@ class GalenDownloadTaskSpec extends Specification {
         when:
         def result = GradleRunner.create()
                 .withProjectDir(testProjectDir.root)
-                .withArguments("${taskName}",  "-x", "galenExtract")
+                .withArguments(TASK_NAME, "-x", "galenExtract")
                 .withPluginClasspath()
                 .build()
 
         then:
         result.output.contains("DONE.")
-        result.task(":${taskName}").outcome == SUCCESS
+        result.task(TASK_NAME).outcome == SUCCESS
     }
 
     def "Build Fails When Galen Download Fails"() {
         given:
-        def taskName = 'galenDownload'
         buildFile << """
             galen {
                 galenDownloadUrl = "http://127.0.0.1:${wireMockPort}/fail/galen.zip"
             }
         """
         when:
-        def result = GradleRunner.create()
+        GradleRunner.create()
                 .withProjectDir(testProjectDir.root)
-                .withArguments("${taskName}",  "-x", "galenExtract")
+                .withArguments(TASK_NAME, "-x", "galenExtract")
                 .withPluginClasspath()
                 .build()
 
@@ -81,9 +83,8 @@ class GalenDownloadTaskSpec extends Specification {
         thrown(Exception)
     }
 
-    def "Build Fails Not When Galen Download Fails If failBuildOnErrors=false"() {
+    def "Build Does Not Fail When Galen Download Fails If failBuildOnErrors=false"() {
         given:
-        def taskName = 'galenDownload'
         buildFile << """
             galen {
                 failBuildOnErrors = false
@@ -94,11 +95,11 @@ class GalenDownloadTaskSpec extends Specification {
         when:
         def result = GradleRunner.create()
                 .withProjectDir(testProjectDir.root)
-                .withArguments("${taskName}",  "-x", "galenExtract")
+                .withArguments(TASK_NAME, "-x", "galenExtract")
                 .withPluginClasspath()
                 .build()
 
         then:
-        result.task(":${taskName}").outcome == SUCCESS
+        result.task(TASK_NAME).outcome == SUCCESS
     }
 }
