@@ -9,7 +9,7 @@ buildscript {
         maven { url "https://mvn.mycompany.com/repository-foo" }
     }
     dependencies {
-        classpath('com.rewedigital:gradle-galen-plugin:2.12')
+        classpath('com.rewedigital:gradle-galen-plugin:2.13')
     }
 }
 apply plugin: "com.rewedigital.galen"

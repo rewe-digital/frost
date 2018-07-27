@@ -1,9 +1,9 @@
 buildscript {
-        repositories { 
-            mavenLocal()
-            mavenCentral()
-        }
-        dependencies { classpath('com.rewedigital:gradle-galen-plugin:2.12') }
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies { classpath('com.rewedigital:gradle-galen-plugin:2.13') }
 }
 apply plugin: "com.rewedigital.galen"
 
