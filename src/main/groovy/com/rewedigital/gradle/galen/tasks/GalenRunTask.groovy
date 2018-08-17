@@ -59,6 +59,7 @@ class GalenRunTask extends DefaultTask {
     void executeTestSuites(browserAndPorts) {
         def testGroups = project.extensions[EXTENSION_NAME].testGroups
         def testsuitesDirectory = project.extensions[EXTENSION_NAME].testsuitesDirectory
+        def recursive = project.extensions[EXTENSION_NAME].recursive
 
         def testsDescription = testGroups ? "test groups: '${testGroups}'" : 'ALL tests'
         LOG.info("Executing Test Suites ({}) ...", testsDescription)
@@ -72,7 +73,7 @@ class GalenRunTask extends DefaultTask {
             def thread = new Thread({
                 try {
                     def reportDirectory = "build/reports/tests/uiTest/${browser.browserId}/${new File(testPath).name}"
-                    executeTestSuitesOnSpecificBrowser(testPath, reportDirectory, seleniumDriverUrl, browser.browserId, testGroups)
+                    executeTestSuitesOnSpecificBrowser(testPath, reportDirectory, seleniumDriverUrl, browser.browserId, testGroups, recursive)
                 } catch (Exception e) {
                     lastException = e
                     LOG.warn("Test suite execution failed: {}", e.getMessage())
@@ -89,7 +90,7 @@ class GalenRunTask extends DefaultTask {
         }
     }
 
-    void executeTestSuitesOnSpecificBrowser(testPath, reportsDirectory, seleniumDriverUrl = null, browser, testGroups) {
+    void executeTestSuitesOnSpecificBrowser(testPath, reportsDirectory, seleniumDriverUrl = null, browser, testGroups, recursive) {
         def workingDirectory = new File(project.getRootDir(), project.extensions[EXTENSION_NAME].galenWorkingDirectory)
         def numberOfParallelTests = project.extensions[EXTENSION_NAME].numberOfParallelTests
 
@@ -98,6 +99,10 @@ class GalenRunTask extends DefaultTask {
                    "--junitreport", "build/test-results/uiTest/TEST-${browser}.xml",
                    "--parallel-tests", "${numberOfParallelTests}",
                    "-Dgalen.settings.website=http://${targetHost()}:${project.extensions[EXTENSION_NAME].sutPort}"]
+
+        if (recursive) {
+            cmd << "--recursive"
+        }
 
         if (testGroups != null) {
             cmd << "--groups"

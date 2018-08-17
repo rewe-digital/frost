@@ -35,6 +35,9 @@ galen {
     // Directory containing the Galen test suites, default is 'src/uiTest/galen/tests'
     testsuitesDirectory = "src/uiTest/galen/tests"
     
+    // Whether to search for all ".test" files recursively in the "testsuitesDirectory", default is false.
+    recursive = true
+
     // Comma separated list of test groups to be executed, default is all test groups. If left empty all test groups are executed.
     testGroups = "ci"
    

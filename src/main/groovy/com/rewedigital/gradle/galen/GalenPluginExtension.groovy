@@ -12,6 +12,7 @@ class GalenPluginExtension {
 
     String[] browsers = ['chrome', 'firefox']
     String testsuitesDirectory = 'src/uiTest/galen/tests'
+    boolean recursive = false
     String testGroups
     int numberOfParallelTests = 1
 
