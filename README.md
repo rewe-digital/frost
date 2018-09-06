@@ -1,6 +1,8 @@
 ## Galen Gradle Plugin
 This is a Gradle Plugin that enables you to run self-contained, multi-browser Galen based Selenium tests within your build. External dependencies(e.g. Databases, Asset Servers, ...) are provided as Docker containers and can be defined via a simple docker-compose file.
 
+[![CircleCI](https://circleci.com/gh/sglahn/gradle-galen-article/tree/master.svg?style=svg)](https://circleci.com/gh/sglahn/gradle-galen-article/tree/master)
+
 ### Getting Started
 The plugin is available via Artifactory.
 ```
