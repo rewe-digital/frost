@@ -32,7 +32,10 @@ galen {
     galenDownloadUrl = "https://my-company-bin-repository/galen/galen-special-version.zip"
 
     // Which browsers to use, default is ['chrome', 'firefox']. Supported browsers are 'chrome' and 'firefox'.
-    browsers = ["chrome"] 
+    browsers = ["chrome"]
+    
+    // Which Docker images to use for the browsers, default is selenium/standalone-chrome:latest and selenium/standalone-firefox:latest.
+    browserImages = [ chrome: 'selenium/standalone-chrome:3.13.0']
     
     // Directory containing the Galen test suites, default is 'src/uiTest/galen/tests'
     testsuitesDirectory = "src/uiTest/galen/tests"
