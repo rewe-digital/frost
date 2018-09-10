@@ -6,7 +6,7 @@ enum Browser {
     FIREFOX('selenium/standalone-firefox', 4444)
 
     public final String browserId
-    public final String imageName
+    public String imageName
     public final int port
 
     Browser(String imageName, int port) {

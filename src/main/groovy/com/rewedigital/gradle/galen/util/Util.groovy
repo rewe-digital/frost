@@ -6,6 +6,7 @@ import org.gradle.api.logging.Logger
 import org.gradle.api.logging.Logging
 
 import static com.rewedigital.gradle.galen.GalenPluginExtension.EXTENSION_NAME
+import static com.rewedigital.gradle.galen.GalenPluginExtension.EXTENSION_NAME
 import static java.util.concurrent.TimeUnit.MINUTES
 import static java.util.concurrent.TimeUnit.SECONDS
 
@@ -35,7 +36,13 @@ class Util {
         def browser = []
         project.extensions[EXTENSION_NAME].browsers.each() { String browserName ->
             try {
-                browser << Browser.valueOf(browserName.toUpperCase())
+                Browser b = Browser.valueOf(browserName.toUpperCase())
+                if (project.extensions[EXTENSION_NAME].browserImages.containsKey(browserName))
+                {
+                    b.imageName = project.extensions[EXTENSION_NAME].browserImages.get(browserName)
+                }
+                browser << b
+
             } catch (IllegalArgumentException e) {
                 throw new GradleException("ERROR: Unknown browser '${browserName}' given. Aborting.")
             }
