@@ -32,7 +32,7 @@ class GalenPluginSpec extends Specification {
         notThrown Exception
 
         where:
-        gradleVersion << ['4.3', '4.4', '4.5', '4.6', '4.7', '4.8', '4.9', '4.10']
+        gradleVersion << ['4.8', '4.9', '4.10']
 
     }
 }
