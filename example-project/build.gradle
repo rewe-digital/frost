@@ -3,7 +3,7 @@ buildscript {
         mavenLocal()
         mavenCentral()
     }
-    dependencies { classpath('com.rewedigital:gradle-galen-plugin:2.15') }
+    dependencies { classpath('com.rewedigital:gradle-galen-plugin:2.16') }
 }
 apply plugin: "com.rewedigital.galen"
 
@@ -12,4 +12,8 @@ galen {
     sutPort = 3000
     composeFile = 'src/uiTest/galen/docker-compose.galen.yml'
     browserImages = [ chrome: 'selenium/standalone-chrome:3.13.0' ]
+}
+
+task clean() {
+    delete "${buildDir}"
 }
