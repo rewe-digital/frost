@@ -17,12 +17,24 @@ class Util {
     private static final long SYNCHRONOUS_PROCESS_TERMINATION_TIMEOUT_MINUTES = 15
 
 
+    static def workingDirectory(project) {
+        new File("${project.getRootDir()}", "${project.extensions[EXTENSION_NAME].galenWorkingDirectory}")
+    }
+
     static def composeOverrideFile(project) {
-        new File("${project.buildDir}", 'tmp/' + "${project.extensions[EXTENSION_NAME].composeOverrideFile}")
+        new File("${project.buildDir}", "tmp${File.separator}${project.extensions[EXTENSION_NAME].composeOverrideFile}")
     }
 
     static def composeFile(project) {
         new File("${project.projectDir}", "${project.extensions[EXTENSION_NAME].composeFile}")
+    }
+
+    static def proxyConfigurationDirectory(project) {
+        new File("${project.projectDir}", "${project.extensions[EXTENSION_NAME].proxyConfigurationDirectory}")
+    }
+
+    static def testSuitesDirectory(project) {
+        new File("${project.projectDir}", "${project.extensions[EXTENSION_NAME].testsuitesDirectory}")
     }
 
     static download(url, target) {

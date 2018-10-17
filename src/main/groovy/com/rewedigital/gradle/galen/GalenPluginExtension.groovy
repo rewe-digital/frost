@@ -11,7 +11,7 @@ class GalenPluginExtension {
     String galenDownloadUrl = "https://github.com/galenframework/galen/releases/download/galen-${galenVersion}/galen-bin-${galenVersion}.zip"
 
     String[] browsers = ['firefox', 'chrome']
-    HashMap<String, String> browserImages
+    HashMap<String, String> browserImages = new HashMap<>()
     String testsuitesDirectory = 'src/uiTest/galen/tests'
     boolean recursive = false
     String testGroups

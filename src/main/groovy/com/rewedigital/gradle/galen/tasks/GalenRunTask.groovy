@@ -22,7 +22,7 @@ class GalenRunTask extends DefaultTask {
 
     @TaskAction
     def action() {
-        def workingDirectory = new File(project.getRootDir(), project.extensions[EXTENSION_NAME].galenWorkingDirectory)
+        def workingDirectory = Util.workingDirectory(project)
         if (!workingDirectory.exists() && !workingDirectory.mkdirs()) {
             def errorMessage = "Error creating galen working directory ${project.extensions[EXTENSION_NAME].galenWorkingDirectory}."
             if (project.extensions[EXTENSION_NAME].failBuildOnErrors) {
@@ -58,12 +58,11 @@ class GalenRunTask extends DefaultTask {
 
     void executeTestSuites(browserAndPorts) {
         def testGroups = project.extensions[EXTENSION_NAME].testGroups
-        def testsuitesDirectory = project.extensions[EXTENSION_NAME].testsuitesDirectory
         def recursive = project.extensions[EXTENSION_NAME].recursive
 
         def testsDescription = testGroups ? "test groups: '${testGroups}'" : 'ALL tests'
         LOG.info("Executing Test Suites ({}) ...", testsDescription)
-        def testPath = new File(testsuitesDirectory).absolutePath
+        def testPath = Util.testSuitesDirectory(project).absolutePath
         Exception lastException = null
 
         def testSuiteStarters = []
