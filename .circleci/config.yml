@@ -42,4 +42,4 @@ jobs:
       - run: gradle test
 
       - store_artifacts:
-          path: /build/reports
+          path: build/reports
