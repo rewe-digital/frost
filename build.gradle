@@ -11,16 +11,16 @@ repositories {
 }
 
 dependencies {
-    compile('org.yaml:snakeyaml:1.21')
+    compile('org.yaml:snakeyaml:1.23')
 
-    testCompile('com.github.tomakehurst:wiremock:2.18.0')
-    testCompile('org.spockframework:spock-core:1.1-groovy-2.4') {
+    testCompile('com.github.tomakehurst:wiremock:2.19.0')
+    testCompile('org.spockframework:spock-core:1.2-groovy-2.5') {
         exclude module: 'groovy-all'
     }
 }
 
 group = 'com.rewedigital'
-version = '2.17'
+version = '2.18'
 
 gradlePlugin {
     plugins {

@@ -7,7 +7,7 @@ class GalenPluginExtension {
 
     String galenWorkingDirectory = 'galen'
     String galenCacheDirectory = "${System.getProperty('user.home')}/.galen"
-    String galenVersion = '2.3.7'
+    String galenVersion = '2.4.0'
 
     String[] browsers = ['firefox', 'chrome']
     HashMap<String, String> browserImages = new HashMap<>()

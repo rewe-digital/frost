@@ -23,8 +23,8 @@ galen {
     // Directory in which to store the cached Galen binary, default is '<USER_HOME>/.galen'
     galenCacheDirectory = "uiTest"
     
-    // The Galen version to use, default is "2.3.7".
-    galenVersion = '2.3.6'
+    // The Galen version to use, default is "2.4.0".
+    galenVersion = '2.4.0'
     
     // The URL where to download the Galen binary, default is "https://github.com/galenframework/galen/releases/download/galen-${galenVersion}/galen-bin-${galenVersion}.zip".
     galenDownloadUrl = "https://my-company-bin-repository/galen/galen-special-version.zip"
