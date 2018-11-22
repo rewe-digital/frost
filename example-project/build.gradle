@@ -15,5 +15,7 @@ galen {
 }
 
 task clean() {
-    delete "${buildDir}"
+    doLast {
+        delete "${buildDir}"
+    }
 }
