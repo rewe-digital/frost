@@ -1,4 +1,4 @@
-package com.rewedigital.gradle.galen
+package org.rewedigital.frost
 
 class GalenPluginExtension {
 
@@ -11,7 +11,7 @@ class GalenPluginExtension {
     String galenDownloadUrl
 
     String[] browsers = ['firefox', 'chrome']
-    HashMap<String, String> browserImages = new HashMap<>()
+    HashMap<String, String> browserImages = [:]
     String testsuitesDirectory = 'src/uiTest/galen/tests'
     boolean recursive = false
     String testGroups

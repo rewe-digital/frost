@@ -1,17 +1,17 @@
-package com.rewedigital.gradle.galen
+package org.rewedigital.frost
 
-import com.rewedigital.gradle.galen.tasks.DockerComposeKillTask
-import com.rewedigital.gradle.galen.tasks.DockerComposePullTask
-import com.rewedigital.gradle.galen.tasks.DockerComposeUpTask
-import com.rewedigital.gradle.galen.tasks.GalenDownloadTask
-import com.rewedigital.gradle.galen.tasks.GalenExtractTask
-import com.rewedigital.gradle.galen.tasks.GalenRunTask
-import com.rewedigital.gradle.galen.tasks.SetupTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.Task
+import org.rewedigital.frost.tasks.DockerComposeKillTask
+import org.rewedigital.frost.tasks.DockerComposePullTask
+import org.rewedigital.frost.tasks.DockerComposeUpTask
+import org.rewedigital.frost.tasks.GalenDownloadTask
+import org.rewedigital.frost.tasks.GalenExtractTask
+import org.rewedigital.frost.tasks.GalenRunTask
+import org.rewedigital.frost.tasks.SetupTask
 
-import static com.rewedigital.gradle.galen.GalenPluginExtension.EXTENSION_NAME
+import static GalenPluginExtension.EXTENSION_NAME
 
 class GalenPlugin implements Plugin<Project> {
 

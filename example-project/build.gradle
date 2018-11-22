@@ -3,9 +3,9 @@ buildscript {
         mavenLocal()
         mavenCentral()
     }
-    dependencies { classpath('com.rewedigital:gradle-galen-plugin:2.18') }
+    dependencies { classpath('org.rewedigital:frost:0.1') }
 }
-apply plugin: "com.rewedigital.galen"
+apply plugin: "org.rewedigital.frost"
 
 galen {
     sutHealthCheckEndpointPath = '/api/health'

@@ -19,14 +19,14 @@ dependencies {
     }
 }
 
-group = 'com.rewedigital'
-version = '2.18'
+group = 'org.rewedigital'
+version = '0.1'
 
 gradlePlugin {
     plugins {
         simplePlugin {
-            id = 'com.rewedigital.galen'
-            implementationClass = 'com.rewedigital.gradle.galen.GalenPlugin'
+            id = 'org.rewedigital.frost'
+            implementationClass = 'org.rewedigital.frost.GalenPlugin'
         }
     }
 }

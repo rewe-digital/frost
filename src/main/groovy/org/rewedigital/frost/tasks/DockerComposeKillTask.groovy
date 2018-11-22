@@ -1,7 +1,8 @@
-package com.rewedigital.gradle.galen.tasks
+package org.rewedigital.frost.tasks
 
-import com.rewedigital.gradle.galen.util.Util
+
 import org.gradle.api.tasks.TaskAction
+import org.rewedigital.frost.util.Util
 
 class DockerComposeKillTask extends DockerComposeTask {
 

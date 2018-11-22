@@ -1,11 +1,11 @@
-package com.rewedigital.gradle.galen.tasks
+package org.rewedigital.frost.tasks
 
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 
-import static com.rewedigital.gradle.galen.GalenPluginExtension.EXTENSION_NAME
+import static org.rewedigital.frost.GalenPluginExtension.EXTENSION_NAME
 
 class GalenExtractTask extends DefaultTask {
 

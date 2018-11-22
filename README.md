@@ -1,18 +1,21 @@
-## Galen Gradle Plugin
-This is a Gradle Plugin that enables you to run self-contained, multi-browser Galen based Selenium tests within your build. External dependencies(e.g. Databases, Asset Servers, ...) are provided as Docker containers and can be defined via a simple docker-compose file.
+## FROST
+
+_Making GUI system tests extremely cool!_
+  
+FROST enables you to run self-contained, multi-browser Galen-based Selenium tests within your build. External dependencies(e.g. Databases, Asset Servers etc.) are provided as Docker containers and can be defined just via a docker-compose file.
+
+FROST is implemented as a Gradle Plugin. But this does not require your project being a Gradle project. It simple does not matter at all how your project is being built.
+
 
 ### Getting Started
-The plugin is available via Artifactory.
+The plugin is available via [Gradle Plugin Portal](https://plugins.gradle.org/). Just apply it in your `build.gradle` as follows:
 ```
 buildscript {
-    repositories {
-        maven { url "https://mvn.mycompany.com/repository-foo" }
-    }
     dependencies {
-        classpath('com.rewedigital:gradle-galen-plugin:2.13')
+        classpath('org.rewedigital:frost:0.1')
     }
 }
-apply plugin: "com.rewedigital.galen"
+apply plugin: "org.rewedigital.frost"
 ```
 You can use the following configuration in your build.gradle file:
 ```
@@ -80,6 +83,7 @@ galen {
 }
 ```
 
+
 #### Example Compose File
 To define the external dependencies of your SUT(System Under Test) use a docker-compose file like this:
 ```
@@ -106,6 +110,14 @@ services:
         - SPRING_DATASOURCE_PASSWORD=
         - ENVIRONMENT_ASSETBASEURL=http://assets:80/
 ```
+
+
+#### Example Run
+To run simply execute:
+```
+./gradlew galenRun
+```
+
 
 ### License
 The MIT license (MIT)

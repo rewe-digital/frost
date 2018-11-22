@@ -1,4 +1,4 @@
-package com.rewedigital.gradle.galen
+package org.rewedigital.frost
 
 import org.gradle.testkit.runner.GradleRunner
 import org.junit.Rule
@@ -16,7 +16,7 @@ class GalenPluginSpec extends Specification {
         given:
         testProjectDir.newFile('my-build.gradle') << """
             plugins {
-                id 'com.rewedigital.galen'
+                id 'org.rewedigital.frost'
             }
             """
 

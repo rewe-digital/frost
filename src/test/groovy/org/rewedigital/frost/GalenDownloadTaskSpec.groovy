@@ -1,11 +1,11 @@
-package com.rewedigital.gradle.galen
+package org.rewedigital.frost
 
 import com.github.tomakehurst.wiremock.WireMockServer
 import com.github.tomakehurst.wiremock.client.WireMock
-import com.rewedigital.gradle.galen.util.FreePortFinder
 import org.gradle.testkit.runner.GradleRunner
 import org.junit.Rule
 import org.junit.rules.TemporaryFolder
+import org.rewedigital.frost.util.FreePortFinder
 import spock.lang.Specification
 
 import static org.gradle.testkit.runner.TaskOutcome.SUCCESS
@@ -35,7 +35,7 @@ class GalenDownloadTaskSpec extends Specification {
         buildFile = testProjectDir.newFile('build.gradle')
         buildFile << """
             plugins {
-                id 'com.rewedigital.galen'
+                id 'org.rewedigital.frost'
             }
             galen {
                 galenVersion = "test-version"

@@ -1,4 +1,4 @@
-package com.rewedigital.gradle.galen.util
+package org.rewedigital.frost.util
 
 class FreePortFinder {
 

@@ -1,4 +1,4 @@
-package com.rewedigital.gradle.galen.browsers
+package org.rewedigital.frost.browsers
 
 enum Browser {
 

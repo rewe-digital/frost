@@ -1,13 +1,13 @@
-package com.rewedigital.gradle.galen.util
+package org.rewedigital.frost.util
 
-import com.rewedigital.gradle.galen.browsers.Browser
 import org.gradle.api.GradleException
 import org.gradle.api.logging.Logger
 import org.gradle.api.logging.Logging
+import org.rewedigital.frost.browsers.Browser
 
-import static com.rewedigital.gradle.galen.GalenPluginExtension.EXTENSION_NAME
 import static java.util.concurrent.TimeUnit.MINUTES
 import static java.util.concurrent.TimeUnit.SECONDS
+import static org.rewedigital.frost.GalenPluginExtension.EXTENSION_NAME
 
 class Util {
 
