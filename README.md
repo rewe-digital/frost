@@ -1,4 +1,4 @@
-## FROST
+# FROST
 
 _Making GUI system tests extremely cool!_
   
@@ -7,7 +7,10 @@ FROST enables you to run self-contained, multi-browser Galen-based Selenium test
 FROST is implemented as a Gradle Plugin. But this does not require your project being a Gradle project. It simple does not matter at all how your project is being built.
 
 
-### Getting Started
+## Getting Started
+
+### Applying the Plugin
+
 The plugin is available via [Gradle Plugin Portal](https://plugins.gradle.org/). Just apply it in your `build.gradle` as follows:
 ```
 buildscript {
@@ -17,7 +20,11 @@ buildscript {
 }
 apply plugin: "org.rewedigital.frost"
 ```
-You can use the following configuration in your build.gradle file:
+
+
+### Configuration
+
+You can use the following configuration in your `build.gradle` file:
 ```
 frost {
     // FROST working directory. Relative directories are being considerd relative to the project directory. Default is 'frost'
@@ -87,8 +94,9 @@ frost {
 ```
 
 
-#### Example Compose File
-To define the external dependencies of your SUT(System Under Test) use a docker-compose file like this:
+### Defining the System Under Test
+
+To define the external dependencies of your System Under Test (SUT) use a docker-compose file like this:
 ```
 version: '2'
 
@@ -115,14 +123,35 @@ services:
 ```
 
 
-#### Example Run
+### Example Run
 To run simply execute:
 ```
 ./gradlew frostRun
 ```
 
 
-### License
+## Local build of the Plugin
+
+For local development use the task
+
+```
+./gradlew publishToMavenLocal
+``` 
+
+This will build the plugin and publish it to your local Maven Repository (~/.m2). You can reference the plugin in your service via
+```
+buildscript {
+    repositories {
+        mavenLocal()
+    }
+    dependencies {
+        classpath('org.rewedigital:frost:0.2')
+    }
+}
+apply plugin: "org.rewedigital.frost"
+```
+
+## License
 The MIT license (MIT)
 
 Copyright (c) 2017-2018 REWE Digital GmbH
