@@ -33,7 +33,7 @@ class GalenPluginExtension {
 
     String getActualGalenDownloadUrl() {
         if (galenDownloadUrl?.trim()) {
-            galenDownloadUrl.trim()
+            return galenDownloadUrl.trim()
         }
 
         "https://github.com/galenframework/galen/releases/download/galen-${galenVersion}/galen-bin-${galenVersion}.zip "
