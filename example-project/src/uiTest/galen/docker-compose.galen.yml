@@ -2,4 +2,4 @@ version: '2'
 
 services:
   sut:
-    image: grafana/grafana:5.2.2
+    image: grafana/grafana:5.3.4
