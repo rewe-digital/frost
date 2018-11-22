@@ -33,6 +33,5 @@ class GalenPluginSpec extends Specification {
 
         where:
         gradleVersion << ['4.8', '4.9', '4.10']
-
     }
 }

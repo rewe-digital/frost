@@ -54,7 +54,7 @@ class PluginExtensionSpec extends Specification {
         def composeFile = 'src/uiTest/galen/docker-compose.galen.yml'
         def composeOverrideFile = 'docker-compose.override.galen.yml'
         def expectedTestSuitesDirectory = "${testProjectDir.root.absolutePath}/${testSuitesDirectory}"
-        def expectedProxyConfigurationDirectory =  "${testProjectDir.root.absolutePath}/${proxyConfigurationDirectory}"
+        def expectedProxyConfigurationDirectory = "${testProjectDir.root.absolutePath}/${proxyConfigurationDirectory}"
         def expectedComposePath = "${testProjectDir.root.absolutePath}/${composeFile}"
         def expectedComposeOverridePath = "${testProjectDir.root.absolutePath}/build/tmp/${composeOverrideFile}"
 

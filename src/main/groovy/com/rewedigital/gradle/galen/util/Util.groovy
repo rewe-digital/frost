@@ -6,7 +6,6 @@ import org.gradle.api.logging.Logger
 import org.gradle.api.logging.Logging
 
 import static com.rewedigital.gradle.galen.GalenPluginExtension.EXTENSION_NAME
-import static com.rewedigital.gradle.galen.GalenPluginExtension.EXTENSION_NAME
 import static java.util.concurrent.TimeUnit.MINUTES
 import static java.util.concurrent.TimeUnit.SECONDS
 
@@ -49,8 +48,7 @@ class Util {
         project.extensions[EXTENSION_NAME].browsers.each() { String browserName ->
             try {
                 Browser b = Browser.valueOf(browserName.toUpperCase())
-                if (project.extensions[EXTENSION_NAME].browserImages.containsKey(browserName))
-                {
+                if (project.extensions[EXTENSION_NAME].browserImages.containsKey(browserName)) {
                     b.imageName = project.extensions[EXTENSION_NAME].browserImages.get(browserName)
                 }
                 browser << b
@@ -74,12 +72,11 @@ class Util {
         LOG.info("Executing '{}'", cmd.join(" "))
         def logDirectory = new File('build/reports/galen-logs')
         def logFile = new File(logDirectory, "${processIdentifier}.log")
+        logFile.parentFile.mkdirs()
+
         def processBuilder = new ProcessBuilder(cmd as String[])
-        if (logFile != null) {
-            logFile.parentFile.mkdirs()
-            processBuilder.redirectOutput(logFile)
-            processBuilder.redirectError(logFile)
-        }
+        processBuilder.redirectOutput(logFile)
+        processBuilder.redirectError(logFile)
         def process = processBuilder.start()
 
         if (executeSynchronously) {
