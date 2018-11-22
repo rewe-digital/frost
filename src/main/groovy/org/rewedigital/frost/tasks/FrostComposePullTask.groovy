@@ -13,7 +13,7 @@ class FrostComposePullTask extends DockerComposeTask {
     def action() {
         def cmd = ["/bin/sh"]
         cmd << "-c"
-        cmd << "export TAG=${project.extensions[EXTENSION_NAME].sutTag} && ${EXECUTABLE} -f ${getComposeFile().getAbsolutePath()} -f ${getComposeOverrideFile().getAbsolutePath()} pull --ignore-pull-failures"
+        cmd << "export TAG=${project.extensions[EXTENSION_NAME].sutTag} && ${EXECUTABLE} -f ${getComposeFile()} -f ${getComposeOverrideFile()} pull --ignore-pull-failures"
 
         Util.executeSynchronously(cmd, "docker_compose_pull")
     }

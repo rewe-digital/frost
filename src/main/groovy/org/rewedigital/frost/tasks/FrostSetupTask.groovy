@@ -35,16 +35,16 @@ class FrostSetupTask extends DefaultTask {
 
     @TaskAction
     def action() {
-        LOG.info("Working directory: ${Util.workingDirectory(project).absolutePath}")
-        LOG.info("Docker-compose file: ${Util.composeFile(project).absolutePath}")
-        LOG.info("Docker-compose override file: ${Util.composeOverrideFile(project).absolutePath}")
-        LOG.info("Proxy configuration directory: ${Util.proxyConfigurationDirectory(project).absolutePath}")
-        LOG.info("Test suites directory: ${Util.testSuitesDirectory(project).absolutePath}")
+        LOG.info("Working directory: ${Util.workingDirectory(project)}")
+        LOG.info("Docker-compose file: ${Util.composeFile(project)}")
+        LOG.info("Docker-compose override file: ${Util.composeOverrideFile(project)}")
+        LOG.info("Proxy configuration directory: ${Util.proxyConfigurationDirectory(project)}")
+        LOG.info("Test suites directory: ${Util.testSuitesDirectory(project)}")
 
         def content = "version: '2'\n" +
                 "services:\n"
         if (useProxy()) {
-            def absoluteProxyConfigurationDirectory = Util.proxyConfigurationDirectory(project).absolutePath
+            def absoluteProxyConfigurationDirectory = Util.proxyConfigurationDirectory(project)
             content += "  proxy:\n" +
                     "    image: rodolpheche/wiremock\n" +
                     "    ports:\n" +

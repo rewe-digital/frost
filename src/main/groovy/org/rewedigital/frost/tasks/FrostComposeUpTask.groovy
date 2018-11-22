@@ -12,7 +12,7 @@ class FrostComposeUpTask extends DockerComposeTask {
     def action() {
         def cmd = ["/bin/sh"]
         cmd << "-c"
-        cmd << "export TAG=${project.extensions[EXTENSION_NAME].sutTag} && ${EXECUTABLE} -f ${getComposeFile().getAbsolutePath()} -f ${getComposeOverrideFile().getAbsolutePath()} up"
+        cmd << "export TAG=${project.extensions[EXTENSION_NAME].sutTag} && ${EXECUTABLE} -f ${getComposeFile()} -f ${getComposeOverrideFile()} up"
 
         Util.executeAsynchronously(cmd, "docker_compose_up")
     }

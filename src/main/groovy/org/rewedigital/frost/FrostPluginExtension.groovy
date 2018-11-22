@@ -13,7 +13,7 @@ class FrostPluginExtension {
 
     String[] browsers = ['firefox', 'chrome']
     HashMap<String, String> browserImages = [:]
-    String testsuitesDirectory = 'src/uiTest/frost/tests'
+    String testSuitesDirectory = 'src/uiTest/frost/tests'
     boolean recursive = false
     String testGroups
     int numberOfParallelTests = 1

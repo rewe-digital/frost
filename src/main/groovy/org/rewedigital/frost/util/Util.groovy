@@ -1,6 +1,7 @@
 package org.rewedigital.frost.util
 
 import org.gradle.api.GradleException
+import org.gradle.api.Project
 import org.gradle.api.logging.Logger
 import org.gradle.api.logging.Logging
 import org.rewedigital.frost.browsers.Browser
@@ -16,28 +17,41 @@ class Util {
     private static final long SYNCHRONOUS_PROCESS_TERMINATION_TIMEOUT_MINUTES = 15
 
 
-    static def workingDirectory(project) {
-        new File("${project.getRootDir()}", "${project.extensions[EXTENSION_NAME].frostWorkingDirectory}")
+    static File workingDirectory(Project project) {
+        def frostWorkingDirectory = new File(project.extensions[EXTENSION_NAME].frostWorkingDirectory)
+        makeAbsoluteIfIsRelative(frostWorkingDirectory, project.rootDir)
     }
 
-    static def composeOverrideFile(project) {
-        new File("${project.buildDir}", "tmp${File.separator}${project.extensions[EXTENSION_NAME].composeOverrideFile}")
+    static File composeOverrideFile(Project project) {
+        def composeOverrideFile = new File(project.extensions[EXTENSION_NAME].composeOverrideFile)
+        makeAbsoluteIfIsRelative(composeOverrideFile, new File(project.buildDir, "tmp"))
     }
 
-    static def composeFile(project) {
-        new File("${project.projectDir}", "${project.extensions[EXTENSION_NAME].composeFile}")
+    static File composeFile(Project project) {
+        def composeFile = new File(project.extensions[EXTENSION_NAME].composeFile)
+        makeAbsoluteIfIsRelative(composeFile, project.projectDir)
     }
 
-    static def proxyConfigurationDirectory(project) {
-        new File("${project.projectDir}", "${project.extensions[EXTENSION_NAME].proxyConfigurationDirectory}")
+    static File proxyConfigurationDirectory(Project project) {
+        def proxyConfigurationDirectory = new File(project.extensions[EXTENSION_NAME].proxyConfigurationDirectory)
+        makeAbsoluteIfIsRelative(proxyConfigurationDirectory, project.projectDir)
     }
 
-    static def testSuitesDirectory(project) {
-        new File("${project.projectDir}", "${project.extensions[EXTENSION_NAME].testsuitesDirectory}")
+    static File testSuitesDirectory(Project project) {
+        def testSuitesDirectory = new File(project.extensions[EXTENSION_NAME].testSuitesDirectory)
+        makeAbsoluteIfIsRelative(testSuitesDirectory, project.projectDir)
     }
 
-    static def cacheDirectory(project) {
-        new File(project.extensions[EXTENSION_NAME].frostCacheDirectory)
+    static File cacheDirectory(Project project) {
+        def cacheDirectory = new File(project.extensions[EXTENSION_NAME].frostCacheDirectory)
+        makeAbsoluteIfIsRelative(cacheDirectory, project.projectDir)
+    }
+
+
+    private static File makeAbsoluteIfIsRelative(File possiblyRelativeDirectory, File baseDirectory) {
+        possiblyRelativeDirectory.isAbsolute() ?
+                possiblyRelativeDirectory :
+                new File(baseDirectory, possiblyRelativeDirectory.toString())
     }
 
 

@@ -60,7 +60,7 @@ class PluginExtensionSpec extends Specification {
 
         buildFile << """
             frost {
-                testsuitesDirectory = '${testSuitesDirectory}'
+                testSuitesDirectory = '${testSuitesDirectory}'
                 proxyConfigurationDirectory = '${proxyConfigurationDirectory}'
                 composeFile = '${composeFile}'
                 composeOverrideFile =  '${composeOverrideFile}'

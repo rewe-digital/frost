@@ -62,7 +62,7 @@ class FrostRunTask extends DefaultTask {
 
         def testsDescription = testGroups ? "test groups: '${testGroups}'" : 'ALL tests'
         LOG.info("Executing Test Suites ({}) ...", testsDescription)
-        def testPath = Util.testSuitesDirectory(project).absolutePath
+        File testSuitesDirectory = Util.testSuitesDirectory(project)
         Exception lastException = null
 
         def testSuiteStarters = []
@@ -71,8 +71,8 @@ class FrostRunTask extends DefaultTask {
             def seleniumDriverUrl = "http://localhost:${browserPort}/wd/hub"
             def thread = new Thread({
                 try {
-                    def reportDirectory = "build/reports/tests/uiTest/${browser.browserId}/${new File(testPath).name}"
-                    executeTestSuitesOnSpecificBrowser(testPath, reportDirectory, seleniumDriverUrl, browser.browserId, testGroups, recursive)
+                    def reportsDirectoryName = "build/reports/tests/uiTest/${browser.browserId}/${testSuitesDirectory.name}"
+                    executeTestSuitesOnSpecificBrowser(testSuitesDirectory, reportsDirectoryName, seleniumDriverUrl, browser.browserId, testGroups, recursive)
                 } catch (Exception e) {
                     lastException = e
                     LOG.warn("Test suite execution failed: {}", e.getMessage())
@@ -89,12 +89,12 @@ class FrostRunTask extends DefaultTask {
         }
     }
 
-    void executeTestSuitesOnSpecificBrowser(testPath, reportsDirectory, seleniumDriverUrl = null, browser, testGroups, recursive) {
+    void executeTestSuitesOnSpecificBrowser(File testSuitesDirectory, reportsDirectoryName, seleniumDriverUrl = null, browser, testGroups, recursive) {
         def workingDirectory = Util.workingDirectory(project)
         def numberOfParallelTests = project.extensions[EXTENSION_NAME].numberOfParallelTests
 
-        def cmd = ["${workingDirectory}/galen/galen", "test", "${testPath}",
-                   "--htmlreport", "${reportsDirectory}",
+        def cmd = ["${workingDirectory}/galen/galen", "test", "${testSuitesDirectory.toString()}",
+                   "--htmlreport", "${reportsDirectoryName}",
                    "--junitreport", "build/test-results/uiTest/TEST-${browser}.xml",
                    "--parallel-tests", "${numberOfParallelTests}",
                    "-Dgalen.settings.website=http://${targetHost()}:${project.extensions[EXTENSION_NAME].sutPort}"]
