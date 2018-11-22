@@ -1,5 +1,5 @@
 @@ set
-    spec_file       src/uiTest/galen/specs/login.gspec
+    spec_file       src/uiTest/frost/specs/login.gspec
     test_name       Example Layout Test
     page            ${galen.settings.website}
 

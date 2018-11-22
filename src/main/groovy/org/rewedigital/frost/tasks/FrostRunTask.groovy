@@ -11,11 +11,11 @@ import org.yaml.snakeyaml.Yaml
 
 import static java.util.concurrent.TimeUnit.HOURS
 import static java.util.concurrent.TimeUnit.MINUTES
-import static org.rewedigital.frost.GalenPluginExtension.EXTENSION_NAME
+import static org.rewedigital.frost.FrostPluginExtension.EXTENSION_NAME
 
-class GalenRunTask extends DefaultTask {
+class FrostRunTask extends DefaultTask {
 
-    static final Logger LOG = Logging.getLogger(GalenRunTask.class)
+    static final Logger LOG = Logging.getLogger(FrostRunTask.class)
 
     private static final int TESTSUITE_TIMEOUT_MILLIS = HOURS.toMillis(1)
 
@@ -24,7 +24,7 @@ class GalenRunTask extends DefaultTask {
     def action() {
         def workingDirectory = Util.workingDirectory(project)
         if (!workingDirectory.exists() && !workingDirectory.mkdirs()) {
-            def errorMessage = "Error creating galen working directory ${project.extensions[EXTENSION_NAME].galenWorkingDirectory}."
+            def errorMessage = "Error creating galen working directory ${Util.workingDirectory(project)}."
             if (project.extensions[EXTENSION_NAME].failBuildOnErrors) {
                 LOG.quiet(errorMessage)
                 throw new GradleException(errorMessage)
@@ -90,7 +90,7 @@ class GalenRunTask extends DefaultTask {
     }
 
     void executeTestSuitesOnSpecificBrowser(testPath, reportsDirectory, seleniumDriverUrl = null, browser, testGroups, recursive) {
-        def workingDirectory = new File(project.getRootDir(), project.extensions[EXTENSION_NAME].galenWorkingDirectory)
+        def workingDirectory = Util.workingDirectory(project)
         def numberOfParallelTests = project.extensions[EXTENSION_NAME].numberOfParallelTests
 
         def cmd = ["${workingDirectory}/galen/galen", "test", "${testPath}",

@@ -6,7 +6,7 @@ import org.junit.rules.TemporaryFolder
 import spock.lang.Specification
 import spock.lang.Unroll
 
-class GalenPluginSpec extends Specification {
+class FrostPluginSpec extends Specification {
 
     @Rule
     final TemporaryFolder testProjectDir = new TemporaryFolder()

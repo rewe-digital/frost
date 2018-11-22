@@ -3,9 +3,9 @@ package org.rewedigital.frost.tasks
 import org.gradle.api.tasks.TaskAction
 import org.rewedigital.frost.util.Util
 
-import static org.rewedigital.frost.GalenPluginExtension.EXTENSION_NAME
+import static org.rewedigital.frost.FrostPluginExtension.EXTENSION_NAME
 
-class DockerComposeUpTask extends DockerComposeTask {
+class FrostComposeUpTask extends DockerComposeTask {
 
     @TaskAction
     @Override

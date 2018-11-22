@@ -7,4 +7,5 @@
 **/*.iws
 
 example-project/galen
+example-project/frost
 example-project/build

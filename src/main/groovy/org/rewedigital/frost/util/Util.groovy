@@ -7,7 +7,7 @@ import org.rewedigital.frost.browsers.Browser
 
 import static java.util.concurrent.TimeUnit.MINUTES
 import static java.util.concurrent.TimeUnit.SECONDS
-import static org.rewedigital.frost.GalenPluginExtension.EXTENSION_NAME
+import static org.rewedigital.frost.FrostPluginExtension.EXTENSION_NAME
 
 class Util {
 
@@ -17,7 +17,7 @@ class Util {
 
 
     static def workingDirectory(project) {
-        new File("${project.getRootDir()}", "${project.extensions[EXTENSION_NAME].galenWorkingDirectory}")
+        new File("${project.getRootDir()}", "${project.extensions[EXTENSION_NAME].frostWorkingDirectory}")
     }
 
     static def composeOverrideFile(project) {
@@ -35,6 +35,11 @@ class Util {
     static def testSuitesDirectory(project) {
         new File("${project.projectDir}", "${project.extensions[EXTENSION_NAME].testsuitesDirectory}")
     }
+
+    static def cacheDirectory(project) {
+        new File(project.extensions[EXTENSION_NAME].frostCacheDirectory)
+    }
+
 
     static download(url, target) {
         def file = new FileOutputStream(target)
@@ -70,7 +75,7 @@ class Util {
 
     private static int executeInternal(cmd, executeSynchronously, processIdentifier, failFast = true) {
         LOG.info("Executing '{}'", cmd.join(" "))
-        def logDirectory = new File('build/reports/galen-logs')
+        def logDirectory = new File('build/reports/frost-logs')
         def logFile = new File(logDirectory, "${processIdentifier}.log")
         logFile.parentFile.mkdirs()
 

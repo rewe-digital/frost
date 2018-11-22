@@ -1,18 +1,19 @@
 package org.rewedigital.frost
 
-class GalenPluginExtension {
+class FrostPluginExtension {
 
-    static final String EXTENSION_NAME = 'galen'
+    static final String EXTENSION_NAME = 'frost'
 
 
-    String galenWorkingDirectory = 'galen'
-    String galenCacheDirectory = "${System.getProperty('user.home')}/.galen"
+    String frostWorkingDirectory = 'frost'
+    String frostCacheDirectory = "${System.getProperty('user.home')}/.frost"
+
     String galenVersion = '2.4.0'
     String galenDownloadUrl
 
     String[] browsers = ['firefox', 'chrome']
     HashMap<String, String> browserImages = [:]
-    String testsuitesDirectory = 'src/uiTest/galen/tests'
+    String testsuitesDirectory = 'src/uiTest/frost/tests'
     boolean recursive = false
     String testGroups
     int numberOfParallelTests = 1
@@ -23,10 +24,10 @@ class GalenPluginExtension {
     int sutReadinessTimeoutInMinutes = 5
 
     String composeFile = 'docker-compose.yml'
-    String composeOverrideFile = 'docker-compose.override.galen.yml'
+    String composeOverrideFile = 'docker-compose.override.frost.yml'
 
     boolean useProxy = false
-    String proxyConfigurationDirectory = 'galen'
+    String proxyConfigurationDirectory = 'frost'
 
     boolean failBuildOnErrors = true
 

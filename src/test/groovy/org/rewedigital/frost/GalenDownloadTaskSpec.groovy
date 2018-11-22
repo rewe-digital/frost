@@ -37,9 +37,9 @@ class GalenDownloadTaskSpec extends Specification {
             plugins {
                 id 'org.rewedigital.frost'
             }
-            galen {
+            frost {
                 galenVersion = "test-version"
-                galenCacheDirectory = "${testProjectDir.newFolder()}"
+                frostCacheDirectory = "${testProjectDir.newFolder()}"
             }
         """
     }
@@ -48,7 +48,7 @@ class GalenDownloadTaskSpec extends Specification {
     def "Can Successfully Download Galen"() {
         given:
         buildFile << """
-            galen {
+            frost {
                 galenDownloadUrl = "http://127.0.0.1:${wireMockPort}/galen/galen.zip"
             }
         """
@@ -68,7 +68,7 @@ class GalenDownloadTaskSpec extends Specification {
     def "Build Fails When Galen Download Fails"() {
         given:
         buildFile << """
-            galen {
+            frost {
                 galenDownloadUrl = "http://127.0.0.1:${wireMockPort}/fail/galen.zip"
             }
         """
@@ -86,7 +86,7 @@ class GalenDownloadTaskSpec extends Specification {
     def "Build Does Not Fail When Galen Download Fails If failBuildOnErrors=false"() {
         given:
         buildFile << """
-            galen {
+            frost {
                 failBuildOnErrors = false
                 galenDownloadUrl = "http://127.0.0.1:${wireMockPort}/fail/galen.zip"
             }

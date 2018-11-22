@@ -3,14 +3,14 @@ buildscript {
         mavenLocal()
         mavenCentral()
     }
-    dependencies { classpath('org.rewedigital:frost:0.1') }
+    dependencies { classpath('org.rewedigital:frost:0.2') }
 }
 apply plugin: "org.rewedigital.frost"
 
-galen {
+frost {
     sutHealthCheckEndpointPath = '/api/health'
     sutPort = 3000
-    composeFile = 'src/uiTest/galen/docker-compose.galen.yml'
+    composeFile = 'src/uiTest/frost/docker-compose.frost.yml'
     browserImages = [chrome: 'selenium/standalone-chrome:3.141.59']
 }
 

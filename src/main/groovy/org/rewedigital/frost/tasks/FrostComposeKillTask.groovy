@@ -4,7 +4,7 @@ package org.rewedigital.frost.tasks
 import org.gradle.api.tasks.TaskAction
 import org.rewedigital.frost.util.Util
 
-class DockerComposeKillTask extends DockerComposeTask {
+class FrostComposeKillTask extends DockerComposeTask {
 
     @TaskAction
     @Override

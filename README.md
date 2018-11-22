@@ -19,12 +19,12 @@ apply plugin: "org.rewedigital.frost"
 ```
 You can use the following configuration in your build.gradle file:
 ```
-galen {
-    // Galen working directory, default is 'galen'
-    galenWorkingDirectory = "uiTest"
+frost {
+    // FROST working directory, default is 'frost'
+    frostWorkingDirectory = "uiTest"
     
-    // Directory in which to store the cached Galen binary, default is '<USER_HOME>/.galen'
-    galenCacheDirectory = "uiTest"
+    // Directory in which to store the cached Galen binary, default is '<USER_HOME>/.frost'
+    frostCacheDirectory = "uiTest"
     
     // The Galen version to use, default is "2.4.0".
     galenVersion = '2.4.0'
@@ -38,8 +38,8 @@ galen {
     // Which Docker images to use for the browsers, default is selenium/standalone-chrome:latest and selenium/standalone-firefox:latest.
     browserImages = [ chrome: 'selenium/standalone-chrome:3.13.0']
     
-    // Directory containing the Galen test suites, default is 'src/uiTest/galen/tests'
-    testsuitesDirectory = "src/uiTest/galen/tests"
+    // Directory containing the Galen test suites, default is 'src/uiTest/frost/tests'
+    testsuitesDirectory = "src/uiTest/frost/tests"
     
     // Whether to search for all ".test" files recursively in the "testsuitesDirectory", default is false.
     recursive = true
@@ -65,20 +65,20 @@ galen {
 
     // Docker compose file describing the environment of the SUT including all of its dependencies, default is 'docker-compose.yml'. 
     // You should omit ports, s.t. the plugin will chose a random free port.
-    composeFile = 'docker-compose.galen.yml'
+    composeFile = 'docker-compose.frost.yml'
 
-    // Docker compose file to describe the environment of the browsers. Default is 'docker-compose.override.galen.yml'.
+    // Docker compose file to describe the environment of the browsers. Default is 'docker-compose.override.frost.yml'.
     // There is no need to manage this manually, it is just for internal use.
-    composeOverrideFile = 'docker-compose.override.galen.yml'
+    composeOverrideFile = 'docker-compose.override.frost.yml'
     
     // Whether the requests to the SUT should be routed through a proxy (wiremock), default is false.
     // This can be useful to add or modify HTTP request headers that your SUT may rely on, as Galen does not seem to support this directly. 
     useProxy = true
     
-    // When using the proxy, this is the directory where the wiremock configuration files are based. Default is 'galen'.
+    // When using the proxy, this is the directory where the wiremock configuration files are based. Default is 'frost'.
     proxyConfigurationDirectory = 'uiTest/wiremock-config'
 
-    // Whether or not failing Galen tests or framework errors should let the Gradle task/build fail, default is true.
+    // Whether or not failing Frost tests or framework errors should let the Gradle task/build fail, default is true.
     failBuildOnErrors = false
 }
 ```
@@ -115,7 +115,7 @@ services:
 #### Example Run
 To run simply execute:
 ```
-./gradlew galenRun
+./gradlew frostRun
 ```
 
 

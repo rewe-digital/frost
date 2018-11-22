@@ -18,9 +18,9 @@ class PluginExtensionSpec extends Specification {
             plugins {
                 id 'org.rewedigital.frost'
             }
-            galen {
+            frost {
                 galenVersion = "test-version"
-                galenCacheDirectory = "${testProjectDir.newFolder()}"
+                frostCacheDirectory = "${testProjectDir.newFolder()}"
                 browsers = [ "chrome" ]
             }
         """
@@ -29,7 +29,7 @@ class PluginExtensionSpec extends Specification {
     def "Adding a new Browser works"() {
         given:
         buildFile << """
-            galen {
+            frost {
                 browserImages = [ chrome: 'selenium/standalone-chrome:3.13.0' ]
             }
         """
@@ -37,11 +37,11 @@ class PluginExtensionSpec extends Specification {
         when:
         GradleRunner.create()
                 .withProjectDir(testProjectDir.root)
-                .withArguments('galenSetup')
+                .withArguments('frostSetup')
                 .withPluginClasspath()
                 .build()
 
-        File output = new File(testProjectDir.getRoot(), 'build/tmp/docker-compose.override.galen.yml')
+        File output = new File(testProjectDir.getRoot(), 'build/tmp/docker-compose.override.frost.yml')
 
         then:
         output.text.contains('image: selenium/standalone-chrome:3.13.0')
@@ -49,17 +49,17 @@ class PluginExtensionSpec extends Specification {
 
     def "Relative paths are relative from the project directory"() {
         given:
-        def testSuitesDirectory = 'src/uiTest/galen/tests'
-        def proxyConfigurationDirectory = 'src/uiTest/galen/proxy-config'
-        def composeFile = 'src/uiTest/galen/docker-compose.galen.yml'
-        def composeOverrideFile = 'docker-compose.override.galen.yml'
+        def testSuitesDirectory = 'src/uiTest/frost/tests'
+        def proxyConfigurationDirectory = 'src/uiTest/frost/proxy-config'
+        def composeFile = 'src/uiTest/frost/docker-compose.frost.yml'
+        def composeOverrideFile = 'docker-compose.override.frost.yml'
         def expectedTestSuitesDirectory = "${testProjectDir.root.absolutePath}/${testSuitesDirectory}"
         def expectedProxyConfigurationDirectory = "${testProjectDir.root.absolutePath}/${proxyConfigurationDirectory}"
         def expectedComposePath = "${testProjectDir.root.absolutePath}/${composeFile}"
         def expectedComposeOverridePath = "${testProjectDir.root.absolutePath}/build/tmp/${composeOverrideFile}"
 
         buildFile << """
-            galen {
+            frost {
                 testsuitesDirectory = '${testSuitesDirectory}'
                 proxyConfigurationDirectory = '${proxyConfigurationDirectory}'
                 composeFile = '${composeFile}'
@@ -70,7 +70,7 @@ class PluginExtensionSpec extends Specification {
         when:
         def result = GradleRunner.create()
                 .withProjectDir(testProjectDir.root)
-                .withArguments('galenSetup', '--info')
+                .withArguments('frostSetup', '--info')
                 .withPluginClasspath()
                 .build()
 

@@ -9,7 +9,7 @@ import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.TaskAction
 import org.rewedigital.frost.util.Util
 
-import static org.rewedigital.frost.GalenPluginExtension.EXTENSION_NAME
+import static org.rewedigital.frost.FrostPluginExtension.EXTENSION_NAME
 
 class GalenDownloadTask extends DefaultTask {
 
@@ -22,7 +22,7 @@ class GalenDownloadTask extends DefaultTask {
 
     @OutputFile
     def getDownloadFile() {
-        new File("${project.extensions[EXTENSION_NAME].galenCacheDirectory}", "/${project.extensions[EXTENSION_NAME].galenVersion}/galen.zip")
+        new File(Util.cacheDirectory(project), "galen/${project.extensions[EXTENSION_NAME].galenVersion}/galen.zip")
     }
 
     @TaskAction

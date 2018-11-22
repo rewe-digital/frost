@@ -11,11 +11,11 @@ import org.rewedigital.frost.browsers.Browser
 import org.rewedigital.frost.util.FreePortFinder
 import org.rewedigital.frost.util.Util
 
-import static org.rewedigital.frost.GalenPluginExtension.EXTENSION_NAME
+import static org.rewedigital.frost.FrostPluginExtension.EXTENSION_NAME
 
-class SetupTask extends DefaultTask {
+class FrostSetupTask extends DefaultTask {
 
-    static final Logger LOG = Logging.getLogger(SetupTask.class)
+    static final Logger LOG = Logging.getLogger(FrostSetupTask.class)
 
     @OutputFile
     def getComposeOverrideFile() {
