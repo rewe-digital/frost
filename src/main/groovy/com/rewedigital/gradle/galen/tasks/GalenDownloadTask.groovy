@@ -16,7 +16,7 @@ class GalenDownloadTask extends DefaultTask {
 
     @Input
     def getGalenDownloadUrl() {
-        "${project.extensions[EXTENSION_NAME].galenDownloadUrl}"
+        "${project.extensions[EXTENSION_NAME].getActualGalenDownloadUrl()}"
     }
 
     @OutputFile
