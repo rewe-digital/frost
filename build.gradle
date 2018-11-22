@@ -14,7 +14,7 @@ dependencies {
     compile('org.yaml:snakeyaml:1.23')
 
     testCompile('com.github.tomakehurst:wiremock:2.19.0')
-    testCompile('org.spockframework:spock-core:1.2-groovy-2.5') {
+    testCompile('org.spockframework:spock-core:1.2-groovy-2.4') {
         exclude module: 'groovy-all'
     }
 }
