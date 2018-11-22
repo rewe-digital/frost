@@ -79,6 +79,7 @@ galen {
     failBuildOnErrors = false
 }
 ```
+
 #### Example Compose File
 To define the external dependencies of your SUT(System Under Test) use a docker-compose file like this:
 ```
@@ -105,9 +106,6 @@ services:
         - SPRING_DATASOURCE_PASSWORD=
         - ENVIRONMENT_ASSETBASEURL=http://assets:80/
 ```
-
-### TODO
-- Test coverage
 
 ### License
 The MIT license (MIT)
