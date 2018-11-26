@@ -47,6 +47,9 @@ class Util {
         makeAbsoluteIfIsRelative(cacheDirectory, project.projectDir)
     }
 
+    static File composeOutputDirectory(project) {
+        new File(project.buildDir, "reports/frost-logs")
+    }
 
     private static File makeAbsoluteIfIsRelative(File possiblyRelativeDirectory, File baseDirectory) {
         possiblyRelativeDirectory.isAbsolute() ?
@@ -79,17 +82,16 @@ class Util {
         browser
     }
 
-    static int executeSynchronously(cmd, processIdentifier) {
-        return executeInternal(cmd, true, processIdentifier)
+    static int executeSynchronously(cmd, processIdentifier, logDirectory) {
+        return executeInternal(cmd, true, processIdentifier, logDirectory)
     }
 
-    static int executeAsynchronously(cmd, processIdentifier, failFast = true) {
-        return executeInternal(cmd, false, processIdentifier, failFast)
+    static int executeAsynchronously(cmd, processIdentifier, logDirectory, failFast = true) {
+        return executeInternal(cmd, false, processIdentifier, logDirectory, failFast)
     }
 
-    private static int executeInternal(cmd, executeSynchronously, processIdentifier, failFast = true) {
+    private static int executeInternal(cmd, executeSynchronously, processIdentifier, logDirectory, failFast = true) {
         LOG.info("Executing '{}'", cmd.join(" "))
-        def logDirectory = new File('build/reports/frost-logs')
         def logFile = new File(logDirectory, "${processIdentifier}.log")
         logFile.parentFile.mkdirs()
 

@@ -4,6 +4,7 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.GradleException
 import org.gradle.api.logging.Logger
 import org.gradle.api.logging.Logging
+import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 import org.rewedigital.frost.browsers.Browser
 import org.rewedigital.frost.util.Util
@@ -19,6 +20,15 @@ class FrostRunTask extends DefaultTask {
 
     private static final int TESTSUITE_TIMEOUT_MILLIS = HOURS.toMillis(1)
 
+    @OutputDirectory
+    def getTestReportDirectory() {
+        new File(project.buildDir, "reports/tests/frost")
+    }
+
+    @OutputDirectory
+    def getJunitTestReportDirectory() {
+        new File(project.buildDir, "test-results/frost")
+    }
 
     @TaskAction
     def action() {
@@ -71,7 +81,7 @@ class FrostRunTask extends DefaultTask {
             def seleniumDriverUrl = "http://localhost:${browserPort}/wd/hub"
             def thread = new Thread({
                 try {
-                    def reportsDirectoryName = "build/reports/tests/uiTest/${browser.browserId}/${testSuitesDirectory.name}"
+                    def reportsDirectoryName = "${getTestReportDirectory()}/${browser.browserId}/${testSuitesDirectory.name}"
                     executeTestSuitesOnSpecificBrowser(testSuitesDirectory, reportsDirectoryName, seleniumDriverUrl, browser.browserId, testGroups, recursive)
                 } catch (Exception e) {
                     lastException = e
@@ -95,7 +105,7 @@ class FrostRunTask extends DefaultTask {
 
         def cmd = ["${workingDirectory}/galen/galen", "test", "${testSuitesDirectory.toString()}",
                    "--htmlreport", "${reportsDirectoryName}",
-                   "--junitreport", "build/test-results/uiTest/TEST-${browser}.xml",
+                   "--junitreport", "${getJunitTestReportDirectory()}/TEST-${browser}.xml",
                    "--parallel-tests", "${numberOfParallelTests}",
                    "-Dgalen.settings.website=http://${targetHost()}:${project.extensions[EXTENSION_NAME].sutPort}"]
 
