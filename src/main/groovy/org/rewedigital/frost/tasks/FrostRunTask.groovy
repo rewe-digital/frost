@@ -7,6 +7,7 @@ import org.gradle.api.logging.Logging
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 import org.rewedigital.frost.browsers.Browser
+import org.rewedigital.frost.util.FrostException
 import org.rewedigital.frost.util.Util
 import org.yaml.snakeyaml.Yaml
 
@@ -30,6 +31,11 @@ class FrostRunTask extends DefaultTask {
         new File(project.buildDir, "test-results/frost")
     }
 
+    @OutputDirectory
+    def getReportDirectory() {
+        Util.composeOutputDirectory(project)
+    }
+
     @TaskAction
     def action() {
         def workingDirectory = Util.workingDirectory(project)
@@ -50,10 +56,13 @@ class FrostRunTask extends DefaultTask {
 
         try {
             executeTestSuites(ports)
-        } catch (Exception e) {
+        } catch (FrostException e) {
+            e.failures.each { browser, exception ->
+                LOG.error("There were failing tests in ${browser.toString().toLowerCase()}. " +
+                        "See the report at: ${getTestReportDirectory()}/${browser.toString().toLowerCase()}/tests/report.html")
+            }
             def errorMessage = "Test execution failed."
             if (project.extensions[EXTENSION_NAME].failBuildOnErrors) {
-                LOG.quiet(errorMessage)
                 throw new GradleException(errorMessage, e)
             } else {
                 LOG.warn(errorMessage)
@@ -73,7 +82,7 @@ class FrostRunTask extends DefaultTask {
         def testsDescription = testGroups ? "test groups: '${testGroups}'" : 'ALL tests'
         LOG.info("Executing Test Suites ({}) ...", testsDescription)
         File testSuitesDirectory = Util.testSuitesDirectory(project)
-        Exception lastException = null
+        def failures = [:]
 
         def testSuiteStarters = []
         Util.getBrowsers(project).each { Browser browser ->
@@ -84,8 +93,7 @@ class FrostRunTask extends DefaultTask {
                     def reportsDirectoryName = "${getTestReportDirectory()}/${browser.browserId}/${testSuitesDirectory.name}"
                     executeTestSuitesOnSpecificBrowser(testSuitesDirectory, reportsDirectoryName, seleniumDriverUrl, browser.browserId, testGroups, recursive)
                 } catch (Exception e) {
-                    lastException = e
-                    LOG.warn("Test suite execution failed: {}", e.getMessage())
+                    failures.put(browser, e)
                 }
             })
             testSuiteStarters << thread
@@ -94,8 +102,8 @@ class FrostRunTask extends DefaultTask {
         testSuiteStarters.each { it.start() }
         testSuiteStarters.each { it.join(TESTSUITE_TIMEOUT_MILLIS) }
 
-        if (lastException != null) {
-            throw lastException
+        if (failures.size() > 0) {
+            throw new FrostException(failures)
         }
     }
 
@@ -126,7 +134,7 @@ class FrostRunTask extends DefaultTask {
             cmd << "-Dgalen.default.browser=${browser}"
         }
 
-        Util.executeSynchronously(cmd, "test__${browser}")
+        Util.executeSynchronously(cmd, "test__${browser}", getReportDirectory())
     }
 
     private void waitUntilServiceIsReady(port) {

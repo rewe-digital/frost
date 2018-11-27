@@ -3,7 +3,7 @@ buildscript {
         mavenLocal()
         mavenCentral()
     }
-    dependencies { classpath('org.rewedigital:frost:0.2') }
+    dependencies { classpath('org.rewedigital:frost:0.4') }
 }
 apply plugin: "org.rewedigital.frost"
 
