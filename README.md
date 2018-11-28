@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/rewe-digital-incubator/frost.svg?branch=master)(https://travis-ci.org/rewe-digital-incubator/frost)
+[![Build Status](https://travis-ci.org/rewe-digital-incubator/frost.svg?branch=master)](https://travis-ci.org/rewe-digital-incubator/frost) 
 
 # FROST
 
