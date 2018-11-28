@@ -32,7 +32,7 @@ frost {
     // FROST working directory. Relative directories are being considerd relative to the root project directory. Default is 'frost'.
     frostWorkingDirectory = "uiTest"
     
-    // Directory in which to store the cached Galen binary. Relative directories are being considerd relative to the project directory. Default is '<USER_HOME>/.frost'
+    // Directory in which to store the cached Galen binary. Relative directories are being considerd relative to the project directory. Default is '<USER_HOME>/.frost'.
     frostCacheDirectory = "uiTest"
     
     // The Galen version to use, default is "2.4.0".
@@ -47,7 +47,7 @@ frost {
     // Which Docker images to use for the browsers, default is selenium/standalone-chrome:latest and selenium/standalone-firefox:latest.
     browserImages = [ chrome: 'selenium/standalone-chrome:3.13.0']
     
-    // Directory containing the Galen test suites. Relative directories are being considerd relative to the project directory. Default is 'src/uiTest/frost/tests'
+    // Directory containing the Galen test suites. Relative directories are being considerd relative to the project directory. Default is 'src/uiTest/frost/tests'.
     testSuitesDirectory = "src/uiTest/frost/tests"
     
     // Whether to search for all ".test" files recursively in the "testSuitesDirectory", default is false.
@@ -56,7 +56,7 @@ frost {
     // Comma separated list of test groups to be executed, default is all test groups. If left empty all test groups are executed.
     testGroups = "ci"
    
-    // Amount of threads per browser for running tests in parallel, default is 1
+    // Amount of threads per browser for running tests in parallel, default is 1.
     numberOfParallelTests = 2
 
     // Tag of the SUT image to be tested, default is 'latest'.
