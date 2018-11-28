@@ -1,5 +1,6 @@
 plugins {
     id 'java-gradle-plugin'
+    id "com.gradle.plugin-publish" version "0.10.0"
 }
 
 apply plugin: 'groovy'
@@ -24,11 +25,19 @@ version = '0.4'
 
 gradlePlugin {
     plugins {
-        simplePlugin {
+        frost {
+            displayName = 'FROST'
             id = 'org.rewedigital.frost'
             implementationClass = 'org.rewedigital.frost.FrostPlugin'
         }
     }
+}
+
+pluginBundle {
+    website = 'https://github.com/rewe-digital-incubator/frost'
+    vcsUrl = 'https://github.com/rewe-digital-incubator/frost'
+    description = 'Creates a system test runtime to enable powerful UI testing during your CI build.'
+    tags = ['Selenium', 'Galen', 'Docker', 'Testing']
 }
 
 publishing {
