@@ -29,7 +29,7 @@ apply plugin: "org.rewedigital.frost"
 You can use the following configuration in your `build.gradle` file:
 ```
 frost {
-    // FROST working directory. Relative directories are being considerd relative to the project directory. Default is 'frost'
+    // FROST working directory. Relative directories are being considerd relative to the root project directory. Default is 'frost'.
     frostWorkingDirectory = "uiTest"
     
     // Directory in which to store the cached Galen binary. Relative directories are being considerd relative to the project directory. Default is '<USER_HOME>/.frost'
@@ -78,7 +78,7 @@ frost {
     composeFile = 'docker-compose.frost.yml'
 
     // Docker compose file to describe the environment of the browsers.
-    // Relative directories are being considerd relative to the project directory. Default is 'docker-compose.override.frost.yml'.
+    // Relative directories are being considerd relative to the build directory. Default is 'docker-compose.override.frost.yml'.
     // There is no need to manage this manually, it is just for internal use.
     composeOverrideFile = 'docker-compose.override.frost.yml'
     
