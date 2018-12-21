@@ -82,6 +82,13 @@ frost {
     // There is no need to manage this manually, it is just for internal use.
     composeOverrideFile = 'docker-compose.override.frost.yml'
     
+    // When set, it is being used as the value for the COMPOSE_PROJECT_NAME environment variable when
+    // starting the docker-compose application. This affects the prefix of the docker container names.
+    // E.g. using the projectName "foo" will result in container names "foo_sut_1", "foo_proxy_1" etc. 
+    // You should use this when you are encountering issues with concurrent runs of other projects' FROST
+    // tests on the same machine. 
+    projectName = 'frost_myproject'
+    
     // Whether the requests to the SUT should be routed through a proxy (wiremock), default is false.
     // This can be useful to add or modify HTTP request headers that your SUT may rely on, as Galen does not seem to support this directly. 
     useProxy = true

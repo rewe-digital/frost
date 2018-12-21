@@ -25,6 +25,7 @@ class FrostPluginExtension {
 
     String composeFile = 'docker-compose.yml'
     String composeOverrideFile = 'docker-compose.override.frost.yml'
+    String projectName = null
 
     boolean useProxy = false
     String proxyConfigurationDirectory = 'frost'

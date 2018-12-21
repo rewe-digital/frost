@@ -16,9 +16,20 @@ class FrostComposeUpTask extends DockerComposeTask {
     @TaskAction
     @Override
     def action() {
+        def env = [
+                TAG: project.extensions[EXTENSION_NAME].sutTag
+        ]
+
+        if (project.extensions[EXTENSION_NAME].projectName) {
+            env << [COMPOSE_PROJECT_NAME: project.extensions[EXTENSION_NAME].projectName]
+        }
+
+        def envString = env.inject([]) { result, entry -> result << "${entry.key}=${entry.value}" }.join(" ")
+        println("env: ${envString}")
+
         def cmd = ["/bin/sh"]
         cmd << "-c"
-        cmd << "export TAG=${project.extensions[EXTENSION_NAME].sutTag} && ${EXECUTABLE} -f ${getComposeFile()} -f ${getComposeOverrideFile()} up"
+        cmd << "export ${envString} && ${EXECUTABLE} -f ${getComposeFile()} -f ${getComposeOverrideFile()} up"
 
         Util.executeAsynchronously(cmd, "docker_compose_up", getReportDirectory())
     }
