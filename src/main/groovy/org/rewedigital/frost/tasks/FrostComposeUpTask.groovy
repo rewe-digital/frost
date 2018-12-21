@@ -25,7 +25,6 @@ class FrostComposeUpTask extends DockerComposeTask {
         }
 
         def envString = env.inject([]) { result, entry -> result << "${entry.key}=${entry.value}" }.join(" ")
-        println("env: ${envString}")
 
         def cmd = ["/bin/sh"]
         cmd << "-c"
