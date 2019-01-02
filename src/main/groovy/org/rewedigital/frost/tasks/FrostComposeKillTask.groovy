@@ -15,22 +15,10 @@ class FrostComposeKillTask extends DockerComposeTask {
     @Override
     def action() {
         try {
-            def cmd = [EXECUTABLE]
-            cmd << "-f"
-            cmd << getComposeFile()
-            cmd << "-f"
-            cmd << getComposeOverrideFile()
-            cmd << "kill"
+            def cmd = dockerComposeCommand("kill")
             Util.executeSynchronously(cmd, "docker_compose_kill", getReportDirectory())
 
-            cmd = [EXECUTABLE]
-            cmd << "-f"
-            cmd << getComposeFile()
-            cmd << "-f"
-            cmd << getComposeOverrideFile()
-            cmd << "rm"
-            cmd << "-f"
-            cmd << "-v"
+            cmd = dockerComposeCommand("rm -f -v")
             Util.executeSynchronously(cmd, "docker_compose_rm", getReportDirectory())
         } finally {
             getComposeOverrideFile().delete()
