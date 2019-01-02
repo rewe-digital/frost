@@ -8,7 +8,7 @@ class FrostPluginExtension {
     String frostWorkingDirectory = 'frost'
     String frostCacheDirectory = "${System.getProperty('user.home')}/.frost"
 
-    String galenVersion = '2.4.0'
+    String galenVersion = '2.4.1'
     String galenDownloadUrl
 
     String[] browsers = ['firefox', 'chrome']
