@@ -20,7 +20,7 @@ dependencies {
 }
 
 group = 'org.rewedigital'
-version = '0.5'
+version = '0.5.1'
 
 gradlePlugin {
     plugins {
