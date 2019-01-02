@@ -17,7 +17,7 @@ The plugin is available via [Gradle Plugin Portal](https://plugins.gradle.org/).
 ```
 buildscript {
     dependencies {
-        classpath('org.rewedigital:frost:0.1')
+        classpath('org.rewedigital:frost:0.5')
     }
 }
 apply plugin: "org.rewedigital.frost"
@@ -29,31 +29,38 @@ apply plugin: "org.rewedigital.frost"
 You can use the following configuration in your `build.gradle` file:
 ```
 frost {
-    // FROST working directory. Relative directories are being considerd relative to the root project directory. Default is 'frost'.
+    // FROST working directory. Relative directories are being considerd relative to the root project
+    // directory. Default is 'frost'.
     frostWorkingDirectory = "uiTest"
     
-    // Directory in which to store the cached Galen binary. Relative directories are being considerd relative to the project directory. Default is '<USER_HOME>/.frost'.
+    // Directory in which to store the cached Galen binary. Relative directories are being considerd
+    // relative to the project directory. Default is '<USER_HOME>/.frost'.
     frostCacheDirectory = "uiTest"
     
     // The Galen version to use, default is "2.4.0".
     galenVersion = '2.4.0'
     
-    // The URL where to download the Galen binary, default is "https://github.com/galenframework/galen/releases/download/galen-${galenVersion}/galen-bin-${galenVersion}.zip".
+    // The URL where to download the Galen binary, default is
+    // "https://github.com/galenframework/galen/releases/download/galen-${galenVersion}/galen-bin-${galenVersion}.zip".
     galenDownloadUrl = "https://my-company-bin-repository/galen/galen-special-version.zip"
 
-    // Which browsers to use, default is ['chrome', 'firefox']. Supported browsers are 'chrome' and 'firefox'.
+    // Which browsers to use, default is ['chrome', 'firefox'].
+    // Supported browsers are 'chrome' and 'firefox'.
     browsers = ["chrome"]
     
-    // Which Docker images to use for the browsers, default is selenium/standalone-chrome:latest and selenium/standalone-firefox:latest.
+    // Which Docker images to use for the browsers.
+    // Default is selenium/standalone-chrome:latest and selenium/standalone-firefox:latest.
     browserImages = [ chrome: 'selenium/standalone-chrome:3.13.0']
     
-    // Directory containing the Galen test suites. Relative directories are being considerd relative to the project directory. Default is 'src/uiTest/frost/tests'.
+    // Directory containing the Galen test suites. Relative directories are being considerd relative to
+    // the project directory. Default is 'src/uiTest/frost/tests'.
     testSuitesDirectory = "src/uiTest/frost/tests"
     
     // Whether to search for all ".test" files recursively in the "testSuitesDirectory", default is false.
     recursive = true
 
-    // Comma separated list of test groups to be executed, default is all test groups. If left empty all test groups are executed.
+    // Comma separated list of test groups to be executed, default is all test groups. If left empty
+    // all test groups are executed.
     testGroups = "ci"
    
     // Amount of threads per browser for running tests in parallel, default is 1.
@@ -65,32 +72,45 @@ frost {
     // Port (internal) used by the SUT, default is 8080.
     sutPort = 8081
     
-    // Path of the endpoint to be queried in order to detect if the SUT is up and running, default is '/admin/healthcheck'.
+    // Path of the endpoint to be queried in order to detect if the SUT is up and running.
+    // Default is '/admin/healthcheck'.
     // The endpoint must respond with status code 200 if and only if the SUT is ready.
     sutHealthCheckEndpointPath = "/health"
    
-    // The maximum time to wait (in minutes) for the SUT healthcheck to signal UP after service start, default is 5.
+    // The maximum time to wait (in minutes) for the SUT healthcheck to signal UP after service start.
+    // Default is 5.
     sutReadinessTimeoutInMinutes = 10
 
     // Docker compose file describing the environment of the SUT including all of its dependencies.
-    // Relative directories are being considerd relative to the project directory. Default is 'docker-compose.yml'. 
+    // Relative directories are being considerd relative to the project directory.
+    // Default is 'docker-compose.yml'.
     // You should omit ports, s.t. the plugin will chose a random free port.
     composeFile = 'docker-compose.frost.yml'
 
     // Docker compose file to describe the environment of the browsers.
-    // Relative directories are being considerd relative to the build directory. Default is 'docker-compose.override.frost.yml'.
+    // Relative directories are being considerd relative to the build directory.
+    // Default is 'docker-compose.override.frost.yml'.
     // There is no need to manage this manually, it is just for internal use.
     composeOverrideFile = 'docker-compose.override.frost.yml'
     
+    // When set, it is being used as the value for the COMPOSE_PROJECT_NAME environment variable when
+    // starting the docker-compose application. This affects the prefix of the docker container names.
+    // E.g. using the projectName "foo" will result in container names "foo_sut_1", "foo_proxy_1" etc. 
+    // You should use this when you are encountering issues with concurrent runs of other projects' FROST
+    // tests on the same machine. 
+    projectName = 'frost_myproject'
+    
     // Whether the requests to the SUT should be routed through a proxy (wiremock), default is false.
-    // This can be useful to add or modify HTTP request headers that your SUT may rely on, as Galen does not seem to support this directly. 
+    // This can be useful to add or modify HTTP request headers that your SUT may rely on, as Galen does
+    // not seem to support this directly. 
     useProxy = true
     
     // When using the proxy, this is the directory where the wiremock configuration files are based.
     // Relative directories are being considerd relative to the project directory. Default is 'frost'.
     proxyConfigurationDirectory = 'uiTest/wiremock-config'
 
-    // Whether or not failing Frost tests or framework errors should let the Gradle task/build fail, default is true.
+    // Whether or not failing Frost tests or framework errors should let the Gradle task/build fail.
+    // Default is true.
     failBuildOnErrors = false
 }
 ```
@@ -147,7 +167,7 @@ buildscript {
         mavenLocal()
     }
     dependencies {
-        classpath('org.rewedigital:frost:0.2')
+        classpath('org.rewedigital:frost:0.5')
     }
 }
 apply plugin: "org.rewedigital.frost"
