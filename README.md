@@ -8,6 +8,8 @@ FROST enables you to run self-contained, multi-browser Galen-based Selenium test
 
 FROST is implemented as a Gradle Plugin. But this does not require your project being a Gradle project. It simple does not matter at all how your project is being built.
 
+![Logo](docs/logo.png)
+
 
 ## Getting Started
 
