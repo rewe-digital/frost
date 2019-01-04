@@ -27,6 +27,8 @@ gradlePlugin {
         simplePlugin {
             id = 'org.rewedigital.frost'
             implementationClass = 'org.rewedigital.frost.FrostPlugin'
+            displayName = 'FROST system test runtime'
+            description = 'Creates a system test runtime to enable powerful UI testing during your CI build.'
         }
     }
 }
