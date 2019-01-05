@@ -1,6 +1,9 @@
 plugins {
     id 'java-gradle-plugin'
+    id 'com.gradle.plugin-publish' version '0.10.0'
 }
+
+apply from: 'publish-to-plugin-portal.gradle'
 
 apply plugin: 'groovy'
 apply plugin: 'maven-publish'
