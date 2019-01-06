@@ -1,0 +1,5 @@
+pluginBundle {
+    website = 'https://github.com/rewe-digital-incubator/frost'
+    vcsUrl = 'https://github.com/rewe-digital-incubator/frost.git'
+    tags = ['testing', 'selenium', 'galen', 'docker']
+}
