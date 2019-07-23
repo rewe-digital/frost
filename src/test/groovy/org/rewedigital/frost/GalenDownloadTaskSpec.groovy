@@ -3,7 +3,6 @@ package org.rewedigital.frost
 import com.github.tomakehurst.wiremock.WireMockServer
 import com.github.tomakehurst.wiremock.client.WireMock
 import org.gradle.testkit.runner.GradleRunner
-import org.junit.Rule
 import org.junit.rules.TemporaryFolder
 import org.rewedigital.frost.util.FreePortFinder
 import spock.lang.Specification
@@ -14,8 +13,7 @@ class GalenDownloadTaskSpec extends Specification {
 
     static final String TASK_NAME = ':galenDownload'
 
-    @Rule
-    final TemporaryFolder testProjectDir = new TemporaryFolder()
+    TemporaryFolder testProjectDir
 
     static final int wireMockPort = FreePortFinder.freePort
     static final WireMockServer wireMockServer = new WireMockServer(wireMockPort)
@@ -25,13 +23,16 @@ class GalenDownloadTaskSpec extends Specification {
     def setupSpec() {
         wireMockServer.stubFor(WireMock.any(WireMock.urlPathEqualTo("/galen/galen.zip"))
                 .willReturn(WireMock.aResponse()
-                .withStatus(200)
-                .withHeader("Content-Type", "application/octet-stream")
-                .withBodyFile("galen.zip")))
+                        .withStatus(200)
+                        .withHeader("Content-Type", "application/octet-stream")
+                        .withBodyFile("galen.zip")))
         wireMockServer.start()
     }
 
+
     def setup() {
+        testProjectDir = new TemporaryFolder()
+        testProjectDir.create()
         buildFile = testProjectDir.newFile('build.gradle')
         buildFile << """
             plugins {
