@@ -1,3 +1,1 @@
 rootProject.name = 'frost'
-
-enableFeaturePreview('STABLE_PUBLISHING')
