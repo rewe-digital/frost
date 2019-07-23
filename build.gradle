@@ -1,6 +1,7 @@
 plugins {
     id 'java-gradle-plugin'
     id 'com.gradle.plugin-publish' version '0.10.1'
+    id 'org.owasp.dependencycheck' version '5.2.0'
 }
 
 apply from: 'publish-to-plugin-portal.gradle'
@@ -24,6 +25,18 @@ dependencies {
 
 group = 'org.rewedigital'
 version = '0.5.1'
+
+
+dependencyCheck {
+    failBuildOnCVSS = 0
+
+    analyzers {
+        assemblyEnabled = false
+        centralEnabled = false
+        retirejs.enabled = false
+    }
+}
+
 
 gradlePlugin {
     plugins {
