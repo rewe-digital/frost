@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
+
+    <!-- groovy-all -->
+    <suppress>
+        <sha1>11524aca7cdd69a736c22ca231a0eb7d7e4af7c6</sha1>
+        <cve>CVE-2016-6497</cve>
+    </suppress>
+
+    <!-- Shaded dependencies in gradle-api -->
+    <suppress>
+        <packageUrl regex="true">^pkg:maven/org\.apache\.maven/maven\-.*$</packageUrl>
+        <vulnerabilityName>CVE-2013-0253</vulnerabilityName>
+    </suppress>
+    <suppress>
+        <packageUrl regex="true">^pkg:maven/com\.fasterxml\.jackson\.core/jackson\-databind@.*$</packageUrl>
+        <cve>CVE-2019-12086</cve>
+        <cve>CVE-2019-12384</cve>
+        <cve>CVE-2019-12814</cve>
+    </suppress>
+
+</suppressions>
