@@ -38,6 +38,6 @@ class FrostPluginExtension {
             return galenDownloadUrl.trim()
         }
 
-        "https://github.com/galenframework/galen/releases/download/galen-${galenVersion}/galen-bin-${galenVersion}.zip "
+        "https://github.com/galenframework/galen/releases/download/galen-${galenVersion}/galen-bin-${galenVersion}.zip"
     }
 }

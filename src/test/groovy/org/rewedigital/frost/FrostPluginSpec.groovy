@@ -1,19 +1,20 @@
 package org.rewedigital.frost
 
 import org.gradle.testkit.runner.GradleRunner
-import org.junit.Rule
 import org.junit.rules.TemporaryFolder
 import spock.lang.Specification
 import spock.lang.Unroll
 
 class FrostPluginSpec extends Specification {
 
-    @Rule
-    final TemporaryFolder testProjectDir = new TemporaryFolder()
+    TemporaryFolder testProjectDir
+
 
     @Unroll
     def "Applying the plugin works with Gradle version #gradleVersion"() {
         given:
+        testProjectDir = new TemporaryFolder()
+        testProjectDir.create()
         testProjectDir.newFile('my-build.gradle') << """
             plugins {
                 id 'org.rewedigital.frost'

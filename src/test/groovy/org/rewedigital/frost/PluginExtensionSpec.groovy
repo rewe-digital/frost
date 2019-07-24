@@ -1,18 +1,18 @@
 package org.rewedigital.frost
 
 import org.gradle.testkit.runner.GradleRunner
-import org.junit.Rule
 import org.junit.rules.TemporaryFolder
 import spock.lang.Specification
 
 class PluginExtensionSpec extends Specification {
 
-    @Rule
-    final TemporaryFolder testProjectDir = new TemporaryFolder()
+    TemporaryFolder testProjectDir
 
     File buildFile
 
     def setup() {
+        testProjectDir = new TemporaryFolder()
+        testProjectDir.create()
         buildFile = testProjectDir.newFile('build.gradle')
         buildFile << """
             plugins {
@@ -25,6 +25,7 @@ class PluginExtensionSpec extends Specification {
             }
         """
     }
+
 
     def "Adding a new Browser works"() {
         given:
