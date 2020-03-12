@@ -39,8 +39,8 @@ frost {
     // relative to the project directory. Default is '<USER_HOME>/.frost'.
     frostCacheDirectory = "uiTest"
     
-    // The Galen version to use, default is "2.4.1".
-    galenVersion = '2.4.1'
+    // The Galen version to use, default is "2.4.4".
+    galenVersion = '2.4.4'
     
     // The URL where to download the Galen binary, default is
     // "https://github.com/galenframework/galen/releases/download/galen-${galenVersion}/galen-bin-${galenVersion}.zip".
