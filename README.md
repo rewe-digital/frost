@@ -19,7 +19,7 @@ The plugin is available via [Gradle Plugin Portal](https://plugins.gradle.org/).
 ```
 buildscript {
     dependencies {
-        classpath('org.rewedigital:frost:0.5')
+        classpath('org.rewedigital:frost:0.5.2')
     }
 }
 apply plugin: "org.rewedigital.frost"
@@ -169,7 +169,7 @@ buildscript {
         mavenLocal()
     }
     dependencies {
-        classpath('org.rewedigital:frost:0.5')
+        classpath('org.rewedigital:frost:0.5.2')
     }
 }
 apply plugin: "org.rewedigital.frost"
