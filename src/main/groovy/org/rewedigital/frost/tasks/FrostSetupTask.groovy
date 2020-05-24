@@ -28,7 +28,7 @@ class FrostSetupTask extends DefaultTask {
     }
 
     @Input
-    def useProxy() {
+    def getUseProxy() {
         project.extensions[EXTENSION_NAME].useProxy
     }
 
@@ -43,7 +43,7 @@ class FrostSetupTask extends DefaultTask {
 
         def content = "version: '2'\n" +
                 "services:\n"
-        if (useProxy()) {
+        if (getUseProxy()) {
             def absoluteProxyConfigurationDirectory = Util.proxyConfigurationDirectory(project)
             content += "  proxy:\n" +
                     "    image: rodolpheche/wiremock\n" +
