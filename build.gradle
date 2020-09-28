@@ -1,7 +1,7 @@
 plugins {
     id 'java-gradle-plugin'
     id 'com.gradle.plugin-publish' version '0.12.0'
-    id 'org.owasp.dependencycheck' version '5.3.2.1'
+    id 'org.owasp.dependencycheck' version '6.0.2'
 }
 
 apply from: 'publish-to-plugin-portal.gradle'
